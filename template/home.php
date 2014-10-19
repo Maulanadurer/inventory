@@ -1,3 +1,68 @@
+          <?php 
+                $_MIN = 500;
+                $p_month = array();
+                $p_sum = array();
+                $p_year = 0;
+                for($i=1;$i<=6;$i++){
+                  $tmp = array();
+                  $sum = 0;
+                  $hpenjualan = mysql_query("SELECT jumlah, MONTH(tgl_jual) AS month, YEAR(tgl_jual) AS year FROM tb_penjualan WHERE kode_cabang='".$_SESSION['kode_cabang']."' AND MONTH(tgl_jual)='".$i."'") or die(mysql_error());
+                  while($row = mysql_fetch_object($hpenjualan)){
+                      $tmp[] = $row->jumlah;
+                      $sum += $row->jumlah;
+                      $year = $row->year;
+                  }
+                  $p_sum [$i] = $sum; 
+                  //print_r($tmp);
+                  $p_month[$i] = implode(',', $tmp);
+                }
+                //print_r($p_sum);
+            $list_m = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
+          ?>
+          <?php $ptotal = 0; foreach ($p_month as $key => $data_m) { $persen = ($p_sum[$key] - $_MIN)/$_MIN * 100; $ptotal+=$persen;}?> 
+        <script type="text/javascript">
+    /*
+    # =============================================================================
+    #   Morris Chart JS
+    # =============================================================================
+    */
+
+    $(window).resize(function(e) {
+      var morrisResize;
+      clearTimeout(morrisResize);
+      return morrisResize = setTimeout(function() {
+        return buildMorris(true);
+      }, 500);
+    });
+    $(function() {
+      return buildMorris();
+    });
+    buildMorris = function($re) {
+      var tax_data;
+      if ($re) {
+        $(".graph").html("");
+      }
+      tax_data = [
+      <?php foreach($p_sum as $k => $p_sum_n){ 
+        echo '{
+          period: "'.$year.' Q'.$k.'",
+          licensed: '.$p_sum_n.',
+          sorned: 660
+        }, ';
+      }?>
+      ];
+      if ($('#hero-graph').length) {
+        Morris.Line({
+          element: "hero-graph",
+          data: tax_data,
+          xkey: "period",
+          ykeys: ["licensed", "sorned"],
+          labels: ["Licensed", "Off the road"],
+          lineColors: ["#5bc0de", "#60c560"]
+        });
+      }
+    };
+        </script>
         <!-- Statistics -->
         <div class="row">
           <div class="col-lg-12">
@@ -5,7 +70,7 @@
               <div class="col-md-4">
                 <div class="number">
                   <div class="icon globe"></div>
-                  86<small>%</small>
+                  <?php echo $ptotal;?><small>%</small>
                 </div>
                 <div class="text">
                   Overall growth
@@ -15,8 +80,8 @@
                 <div class="number">
                   <div class="icon visitors"></div>
                   <?php $data=mysql_query("SELECT COUNT(*) AS jum_cabang FROM tb_cabang");
-				  		$row=mysql_fetch_object($data);
-						echo $row->jum_cabang;?>
+              $row=mysql_fetch_object($data);
+            echo $row->jum_cabang;?>
                 </div>
                 <div class="text">
                   Cabang
@@ -44,141 +109,52 @@
           </div>
         </div>
         <!-- End Statistics -->
-        
+
         <div class="row">
           <!-- Pie Graph 1 -->
           <div class="col-lg-5">
-            <div class="widget-container">
+            <div class="widget-container fluid-height">
               <div class="heading">
-                <i class="fa fa-bar-chart"></i>Penjualan Tahun 2013
+                <i class="fa fa-bar-chart-o"></i>Penjualan
               </div>
-              <div class="widget-content padded">
-                <div id="linechart-1">
-                  Loading...
+              <div class="widget-content padded text-center">
+                <div class="graph-container">
+                  <div class="caption"></div>
+                  <div class="graph" id="hero-graph"></div>
+                  <!-- Line Chart:Morris -->
                 </div>
-                
               </div>
             </div>
           </div>
+
+
           <div class="col-lg-7">
             <div class="widget-container fluid-height">
               <!-- Table -->
               <table class="table table-filters">
                 <tbody>
+                
+                <?php 
+                  foreach ($p_month as $key => $data_m) { ?>                        
                   <tr>
-                    <td class="filter-category blue">
+                    <td class="filter-category <?php echo ($key%2==0)?"blue":"red";?>">
                       <div class="arrow-left"></div>
-                      <i class="fa fa-stethoscope"></i>
-                    </td>
-                    <td>
-                      Januari
+                      <?php echo $list_m[$key-1];?>
                     </td>
                     <td class="hidden-xs">
                       <div class="sparkslim">
-                        50,55,60,40,30,35,30,20,25,30,40,20,15
+                        <?php echo $data_m;?>
                       </div>
                     </td>
                     <td>
-                      <div class="danger">
-                        -4%
+                      <?php $persen = ($p_sum[$key] - $_MIN)/$_MIN * 100;?>
+                      <div class=<?php echo ($persen<=0)? "danger": "success";?>>
+                        <?php echo $persen;?>%
                       </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td class="filter-category green">
-                      <div class="arrow-left"></div>
-                      <i class="fa fa-coffee"></i>
-                    </td>
-                    <td>
-                      Februari
-                    </td>
-                    <td class="hidden-xs">
-                      <div class="sparkslim">
-                        5,10,15,50,80,50,40,30,50,60,70,75,75
-                      </div>
-                    </td>
-                    <td>
-                      <div class="success">
-                        +12%
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="filter-category orange">
-                      <div class="arrow-left"></div>
-                      <i class="fa fa-gamepad"></i>
-                    </td>
-                    <td>
-                      Maret
-                    </td>
-                    <td class="hidden-xs">
-                      <div class="sparkslim">
-                        100,100,80,70,40,20,20,40,50,60,70
-                      </div>
-                    </td>
-                    <td>
-                      <div class="success">
-                        +5%
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="filter-category red">
-                      <div class="arrow-left"></div>
-                      <i class="fa fa-gift"></i>
-                    </td>
-                    <td>
-                      April
-                    </td>
-                    <td class="hidden-xs">
-                      <div class="sparkslim">
-                        5,10,15,20,30,40,80,100,120,120,140
-                      </div>
-                    </td>
-                    <td>
-                      <div class="success">
-                        +26%
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="filter-category blue">
-                      <div class="arrow-left"></div>
-                      <i class="fa fa-stethoscope"></i>
-                    </td>
-                    <td>
-                      Mei
-                    </td>
-                    <td class="hidden-xs">
-                      <div class="sparkslim">
-                        50,55,60,40,30,35,30,20,25,30,40,20,15
-                      </div>
-                    </td>
-                    <td>
-                      <div class="danger">
-                        -4%
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="filter-category magenta">
-                      <div class="arrow-left"></div>
-                      <i class="fa fa-trophy"></i>
-                    </td>
-                    <td>
-                      Juni
-                    </td>
-                    <td class="hidden-xs">
-                      <div class="sparkslim">
-                        20,40,50,60,70,80,90,95,100,80,70,60
-                      </div>
-                    </td>
-                    <td>
-                      <div class="danger">
-                        -4%
-                      </div>
-                    </td>
-                  </tr>
+                <?php }?>
+                 
                 </tbody>
               </table>
             </div>
