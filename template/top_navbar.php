@@ -92,14 +92,8 @@
                 <a class="current" href="main.php?hal=home"><span aria-hidden="true" class="se7en-home"></span>Dashboard</a>
               </li>
               <li><a data-toggle="dropdown" href="#">
-                <span aria-hidden="true" class="se7en-feed"></span>Proses<b class="caret"></b></a>
+                <span aria-hidden="true" class="se7en-feed"></span>Pengolahan Data<b class="caret"></b></a>
                 <ul class="dropdown-menu">
-                  <li><a href="main.php?hal=daftar_barang">
-                    <p>
-                      List Barang
-                    </p></a>
-                    
-                  </li>
                   <li><a href="main.php?hal=daftar_stok">
                     <p>
                       Daftar Stok Barang
@@ -112,15 +106,15 @@
                     </p></a>
                     
                   </li>
-                  <li><a href="main.php?hal=daftar_penjualan">
+                  <li><a href="main.php?hal=daftar_permintaan">
                     <p>
-                      Daftar Penjualan
+                      Daftar Permintaan
                     </p></a>
                     
                   </li>
-                  <li><a href="main.php?hal=form_pemesanan">
+                  <li><a href="main.php?hal=daftar_penjualan">
                     <p>
-                      Form Pemesanan
+                      Daftar Penjualan
                     </p></a>
                     
                   </li>
@@ -132,6 +126,12 @@
                   <li><a href="main.php?hal=daftar_supplier">
                     <p>
                       Daftar Supplier
+                    </p></a>
+                    
+                  </li>
+                  <li><a href="main.php?hal=daftar_barang">
+                    <p>
+                     Master Barang
                     </p></a>
                     
                   </li>
