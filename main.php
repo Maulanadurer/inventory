@@ -20,7 +20,7 @@
       <!-- End Navigation -->
       <div class="container-fluid main-content">
       	<?php ?>
-      	<?php if(file_exists('template/'.$_GET['hal'].'.php')){include"template/".$_GET['hal'].".php";}else{header('location:ops.php');}?>
+      	<?php if(file_exists('template/'.$_GET['hal'].'.php')){include"template/".$_GET['hal'].".php";}else{header('location:404.html');}?>
       </div>
     </div>
     <div class="style-selector">
