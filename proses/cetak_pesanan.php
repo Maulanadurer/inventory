@@ -15,22 +15,25 @@ if(isset($_POST['submit'])){
     $kode_barang = $_POST['kode_barang'];
     $kode_supplier = $_POST['kode_supplier'];
     $jumlah = $_POST['jumlah'];
+    
+    
+    $kode_pesan = kodefikasi('tb_pemesanan','kode_pesan','POS');
+    $data = array(
+                  "kode_pesan"=>$kode_pesan,
+                  "kode_suplier"=>$kode_supplier[0],
+                  "tgl_beli"=>"NOW()",
+                  "status"=>"0",
+                 );
+    $resp = $database->insert("tb_pemesanan",$data);
     $i = 0;
     foreach($kode_barang as $kode_brg){
-        $kode_pesan = kodefikasi('tb_pemesanan','kode_pesan','POS');
-        $data = array(
-                      "kode_pesan"=>$kode_pesan,
-                      "kode_suplier"=>$kode_supplier[$i],
-                      "tgl_beli"=>"NOW()",
-                      "status"=>"0",
-                    );
-        $resp = $database->insert("tb_pemesanan",$data);
         $detail = array(
                       "kode_pesan"=>$kode_pesan,
-                      "kode_barang"=>$kode_barang[$i],
+                      "kode_barang"=>$kode_brg,
                       "qty"=>$jumlah[$i],
                     );
         $resp = $database->insert("tb_detail_pemesanan",$detail);
+        $i++;
     }
     $database->truncate(array("temp_pesan"));
     //if($resp == 0){
