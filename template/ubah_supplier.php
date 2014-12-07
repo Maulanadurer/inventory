@@ -1,5 +1,5 @@
-<?php $data = mysql_query("SELECT * FROM tb_supplier WHERE kode_supplier='".$_GET['id']."'") or die(mysql_error());
-	  $row2 = mysql_fetch_object($data);
+<?php $database = SimplePDO::getInstance();
+	  $row = $database->get_row("SELECT * FROM tb_supplier WHERE kode_supplier=?",array($_GET['kode']));
 ?>
 
 <div class="page-title">
@@ -18,14 +18,14 @@
           <div class="form-group">
             <label class="control-label col-md-2">Nama Supplier</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="nama supplier" type="text" name="nama_supplier" value="<?php echo $row2->nama_supplier;?>"/>
-              <input type="hidden" name="kode_supplier" value="<?php echo $row2->kode_supplier;?>" />
+              <input class="form-control" placeholder="nama supplier" type="text" name="nama_supplier" value="<?php echo $row->nama_supplier;?>"/>
+              <input type="hidden" name="kode_supplier" value="<?php echo $row->kode_supplier;?>" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Alamat Supplier</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="alamat" type="text" name="alamat" value="<?php echo $row2->alamat_supplier;?>" />
+              <input class="form-control" placeholder="alamat" type="text" name="alamat" value="<?php echo $row->alamat_supplier;?>" />
             </div>
           </div> 
           <div class="form-group">

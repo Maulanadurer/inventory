@@ -1,4 +1,5 @@
-        <?php include"proses/ar.php";?>
+        <?php include"proses/ar.php";
+              $database = SimplePDO::getInstance();?>
         <div class="row">
           <div class="col-lg-12">
             <div class="widget-container fluid-height">
@@ -7,9 +8,9 @@
                     <div class="form-group">
                       <label class="control-label col-md-5">Nama Barang</label>
                       <div class="col-md-5">
-                      <?php $query=mysql_query("SELECT * FROM tb_barang") or die(mysql_error());?>
+                      <?php $query=$database->get_results( "SELECT * FROM tb_barang" );?>
                         <select class="form-control" name="kode_barang">
-                        <?php while($row = mysql_fetch_object($query)){?>
+                        <?php foreach($query as $row){?>
                         	<option value="<?php echo $row->kode_barang;?>"><?php echo $row->nama_barang;?></option>
                         <?php }?>
                         </select>
@@ -18,9 +19,9 @@
           					<div class="form-group">
                       <label class="control-label col-md-5">Nama Cabang</label>
                       <div class="col-md-5">
-                       <?php $query=mysql_query("SELECT * FROM tb_cabang") or die(mysql_error());?>
+                       <?php $query=$database->get_results( "SELECT * FROM tb_cabang" );?>
                         <select class="form-control" name="kode_cabang">
-                        <?php while($row = mysql_fetch_object($query)){?>
+                        <?php foreach($query as $row){?>
                         	<option value="<?php echo $row->kode_cabang;?>"><?php echo $row->nama_cabang;?></option>
                         <?php }?>
                         </select>
@@ -58,8 +59,9 @@
             $sdate = substr($startdate, 6,4)."-".substr($startdate, 3,2)."-".substr($startdate, 0,2);
             $edate = substr($enddate, 6,4)."-".substr($enddate, 3,2)."-".substr($enddate, 0,2);
             $month = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-            $data = mysql_query("SELECT SUM(jumlah) AS jumlah,MONTH(`tgl_jual`) AS monthn FROM `tb_penjualan` WHERE `kode_barang` ='".$kode_barang."' AND `tgl_jual` BETWEEN '".$sdate."' AND '".$edate."' AND kode_cabang='".$kode_cabang."' GROUP BY MONTH(`tgl_jual`)") or die(mysql_error());
-            while($row = mysql_fetch_object($data)){
+            $data=$database->get_results("SELECT SUM(jumlah) AS jumlah,MONTH(`tgl_jual`) AS month FROM `tb_penjualan` WHERE `kode_barang` ='".$kode_barang."' AND `tgl_jual` BETWEEN '".$sdate."' AND '".$edate."' AND kode_cabang='".$kode_cabang."' GROUP BY MONTH(`tgl_jual`)");
+
+            foreach($data as $row){
               $jumlah_barang[]=$row->jumlah;
               $n_month[] = $row->month-1;
             }

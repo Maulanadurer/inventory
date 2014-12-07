@@ -65,7 +65,7 @@
                 </ul>
               </li>
               <li class="dropdown user hidden-xs"><a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <?php #echo $_SESSION['username'];?><b class="caret"></b></a>
+                <?php echo $_SESSION['username'];?><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">
                     <i class="fa fa-user"></i>My Account</a>
@@ -100,15 +100,15 @@
                     </p></a>
                     
                   </li>
-                  <li><a href="main.php?hal=distribusi_barang">
+                  <li><a href="main.php?hal=daftar_stok">
                     <p>
-                      Distribusi Barang
+                      Daftar Stok Barang
                     </p></a>
                     
                   </li>
-                  <li><a href="main.php?hal=log_stok_barang">
+                  <li><a href="main.php?hal=daftar_pembelian">
                     <p>
-                      Log Stok Barang
+                      Daftar Pembelian
                     </p></a>
                     
                   </li>
@@ -168,7 +168,7 @@
                   </li>
                 </ul>
               </li>
-             <li><a href="main.php?hal=pengguna">
+             <li><a href="main.php?hal=daftar_user">
                 <span aria-hidden="true" class="se7en-gear"></span>Pengguna</a>
              </li>
           </ul>

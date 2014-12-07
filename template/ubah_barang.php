@@ -1,5 +1,5 @@
-<?php $data = mysql_query("SELECT * FROM tb_barang WHERE kode_barang='".$_GET['id']."'") or die(mysql_error());
-	  $row2 = mysql_fetch_object($data);
+<?php $database = SimplePDO::getInstance();
+	  $row = $database->get_row("SELECT * FROM tb_barang WHERE kode_barang=?",array($_GET['kode']));
 ?>
 
 <div class="page-title">
@@ -18,20 +18,20 @@
           <div class="form-group">
             <label class="control-label col-md-2">Nama Barang</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="nama barang" type="text" name="nama_barang" value="<?php echo $row2->nama_barang;?>"/>
-              <input type="hidden" name="kode_barang" value="<?php echo $row2->kode_barang;?>" />
+              <input class="form-control" placeholder="nama barang" type="text" name="nama_barang" value="<?php echo $row->nama_barang;?>"/>
+              <input type="hidden" name="kode_barang" value="<?php echo $row->kode_barang;?>" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Deskripsi Barang</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="deskripsi" type="text" name="deskripsi" value="<?php echo $row2->deskripsi_barang;?>" />
+              <input class="form-control" placeholder="deskripsi" type="text" name="deskripsi" value="<?php echo $row->deskripsi_barang;?>" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Stok Barang</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="stok" type="stok barang" name="stok_barang" value="<?php echo $row2->stok_barang;?>"/>
+              <input class="form-control" placeholder="stok" type="stok barang" name="stok_barang" value="<?php echo $row->stok_barang;?>"/>
             </div>
           </div>
           <div class="form-group">

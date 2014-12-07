@@ -1,26 +1,33 @@
 <?php
 if(isset($_POST['submit'])){
-	include"../config/cek_session.php";
-	include"../config/koneksi.php";
-	echo '1';
+    require_once "../config/SimplePDO.php";
+     $params = array(
+         'host' => 'localhost', 
+         'user' => 'root', 
+         'password' => '', 
+         'database' => 'db_inventory_scm'
+     );
+     
+    //Set the options
+    SimplePDO::set_options( $params );
+    $database = SimplePDO::getInstance();
+
 	$username = stripslashes($_POST['username']);
 	$password = md5(stripslashes($_POST['password']));
-	$query = mysql_query("SELECT * FROM tb_admin WHERE username_admin='".$username."'")or die(mysql_error());
-	if(mysql_num_rows($query)>0){
-		while($data=mysql_fetch_array($query)){
-			echo "2";
-			if($data['username_admin']==$username&&$data['password_admin']==$password){
-				$_SESSION['username']=$data['username_admin'];
-				$_SESSION['admin_id']=$data['kode_admin'];
-				$_SESSION['level'] = $data['level'];
-				header('location:'.$base_url.'main.php?hal=home');
-			}else{
-				header('location:index.php');
-			}
-		}	
+    $data = $database->get_row("SELECT * FROM tb_admin WHERE username_admin=?",array($username));
+	if($database->num_rows("SELECT COUNT(*) FROM tb_admin WHERE username_admin=?",array($username))>0){
+	   if($data->username_admin==$username&&$data->password_admin==$password){
+	        session_start();
+			$_SESSION['username']=$data->username_admin;
+			$_SESSION['admin_id']=$data->kode_admin;
+			$_SESSION['level'] = $data->level;
+			header('location:../main.php?hal=home');
+		}else{
+			header('location:../index.php');
+		}
 	}else{
-		header('location:index.php');
+		header('location:../index.php');
 	}
-}else{header('location:index.php');}
+}else{header('location:../index.php');}
 
 ?>

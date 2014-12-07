@@ -1,4 +1,5 @@
-<?php $query = mysql_query("SELECT * FROM tb_supplier") or die(mysql_error());?>
+<?php $database = SimplePDO::getInstance();
+      $query = $database->get_results( "SELECT * FROM tb_supplier" );?>
         <div class="page-title">
           <h1>
             Daftar Supplier
@@ -33,7 +34,7 @@
                     <th></th>
                   </thead>
                   <tbody>
-             <?php $i = 1; while($row=mysql_fetch_object($query)){?>
+             <?php $i = 1; foreach($query as $row){?>
                     <tr>
                       <td class="check hidden-xs">
                         <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_supplier;?>"><span></span></label>
@@ -52,7 +53,7 @@
                       </td>
                       <td class="actions">
                         <div class="action-buttons">
-                          <a class="table-actions" href="main.php?hal=ubah_supplier&id=<?php echo $row->kode_supplier;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_supplier.php?id=<?php echo $row->kode_supplier;?>"><i class="fa fa-trash-o"></i></a>
+                          <a class="table-actions" href="main.php?hal=ubah_supplier&kode=<?php echo $row->kode_supplier;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_supplier.php?kode=<?php echo $row->kode_supplier;?>"><i class="fa fa-trash-o"></i></a>
                         </div>
                       </td>
                     </tr>

@@ -1,4 +1,5 @@
-<?php $query = mysql_query("SELECT * FROM tb_user tu JOIN tb_cabang tc ON tu.kode_cabang = tc.kode_cabang") or die(mysql_error());?>
+<?php $database = SimplePDO::getInstance();
+      $query = $database->get_results("SELECT tc.*,tu.* FROM tb_user tu JOIN tb_cabang tc ON tu.kode_cabang = tc.kode_cabang"); ?>
         <div class="page-title">
           <h1>
             Daftar User
@@ -16,7 +17,7 @@
                 <table class="table table-bordered table-striped" id="dataTable1">
                   <thead>
                     <th class="check-header hidden-xs">
-                      <label><input id="checkAll" name="checkAll" type="checkbox"><span></span></label>
+                      <label><input id="checkAll" name="checkAll" type="checkbox"/><span></span></label>
                     </th>
                     <th>
                       No
@@ -42,10 +43,10 @@
                     <th></th>
                   </thead>
                   <tbody>
-             <?php $i = 1; while($row=mysql_fetch_object($query)){?>
+             <?php $i = 1; foreach($query as $row){?>
                     <tr>
                       <td class="check hidden-xs">
-                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_user;?>"><span></span></label>
+                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_user;?>"/><span></span></label>
                       </td>
                       <td>
                       	<?php echo $i; ?>

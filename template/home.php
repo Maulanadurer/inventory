@@ -1,4 +1,4 @@
-          <?php 
+        <?php $database = SimplePDO::getInstance();
                 $_MIN = 500;
                 $p_month = array();
                 $p_sum = array();
@@ -6,8 +6,8 @@
                 for($i=1;$i<=6;$i++){
                   $tmp = array();
                   $sum = 0;
-                  $hpenjualan = mysql_query("SELECT jumlah, MONTH(tgl_jual) AS month, YEAR(tgl_jual) AS year FROM tb_penjualan WHERE kode_cabang='".$_SESSION['kode_cabang']."' AND MONTH(tgl_jual)='".$i."'") or die(mysql_error());
-                  while($row = mysql_fetch_object($hpenjualan)){
+                  $hpenjualan = $database->get_results("SELECT jumlah, MONTH(tgl_jual) AS month, YEAR(tgl_jual) AS year FROM tb_penjualan WHERE MONTH(tgl_jual)='".$i."'");
+                  foreach($hpenjualan as $row){
                       $tmp[] = $row->jumlah;
                       $sum += $row->jumlah;
                       $year = $row->year;
@@ -79,9 +79,7 @@
               <div class="col-md-4">
                 <div class="number">
                   <div class="icon visitors"></div>
-                  <?php $data=mysql_query("SELECT COUNT(*) AS jum_cabang FROM tb_cabang");
-              $row=mysql_fetch_object($data);
-            echo $row->jum_cabang;?>
+                  <?php echo $database->num_fields("tb_cabang")-1;?>
                 </div>
                 <div class="text">
                   Cabang

@@ -24,7 +24,7 @@
             <input class="form-control" placeholder="Username or Email" type="text" name="username">
           </div>
           <div class="form-group">
-            <input class="form-control" placeholder="Password" type="text" name="password">
+            <input class="form-control" placeholder="Password" type="password" name="password">
             <input type="submit" value="&#xf054;" name="submit">
           </div>
           <div class="form-options clearfix">

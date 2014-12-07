@@ -59,7 +59,7 @@
                       </td>
                       <td class="actions">
                         <div class="action-buttons">
-                          <a class="table-actions" href="main.php?hal=ubah_barang&id=<?php echo $row->kode_barang;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_barang.php?id=<?php echo $row->kode_barang;?>"><i class="fa fa-trash-o"></i></a>
+                          <a class="table-actions" href="main.php?hal=ubah_barang&kode=<?php echo $row->kode_barang;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_barang.php?kode=<?php echo $row->kode_barang;?>"><i class="fa fa-trash-o"></i></a>
                         </div>
                       </td>
                     </tr>

@@ -1,10 +1,14 @@
-<?php
-include"../config/cek_session.php";
-include"../config/koneksi.php";
-$data=mysql_query("DELETE FROM tb_barang WHERE kode_barang='".$_GET['id']."'") or die(mysql_error());
-if($data>0){
-	header('location:../main.php?hal=daftar_barang&st=1');
-}else{
-	echo "Error";
-}
+<?php require_once "../config/SimplePDO.php";
+ $params = array(
+     'host' => 'localhost', 
+     'user' => 'root', 
+     'password' => '', 
+     'database' => 'db_inventory_scm'
+ );
+ 
+//Set the options
+SimplePDO::set_options( $params );
+$database = SimplePDO::getInstance();
+$database->delete("tb_barang",array("kode_barang"=>$_GET['kode']));
+header('location:../main.php?hal=daftar_barang&st=1');
 ?>
