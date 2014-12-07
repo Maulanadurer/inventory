@@ -1,4 +1,4 @@
-<?php include"config/cek_session.php";?>
+<?php #include"config/cek_session.php";?>
 <!DOCTYPE html>
 <html>
   

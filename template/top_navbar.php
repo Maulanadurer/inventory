@@ -65,7 +65,7 @@
                 </ul>
               </li>
               <li class="dropdown user hidden-xs"><a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                <?php echo $_SESSION['username'];?><b class="caret"></b></a>
+                <?php #echo $_SESSION['username'];?><b class="caret"></b></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">
                     <i class="fa fa-user"></i>My Account</a>

@@ -1,4 +1,4 @@
-<?php include"config/cek_session.php";?>
+<?php #include"config/cek_session.php";?>
 <?php include"config/koneksi.php";?>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
       <!-- End Navigation -->
       <div class="container-fluid main-content">
       	<?php ?>
-      	<?php if(file_exists('template/'.$_GET['hal'].'.php')){include"template/".$_GET['hal'].".php";}else{header('location:template/not_found.php');}?>
+      	<?php if(file_exists('template/'.$_GET['hal'].'.php')){include"template/".$_GET['hal'].".php";}else{header('location:ops.php');}?>
       </div>
     </div>
     <div class="style-selector">

@@ -2,7 +2,7 @@
       $query = $database->get_results( "SELECT * FROM tb_barang" );?>
         <div class="page-title">
           <h1>
-            Daftar Barang 
+            Daftar Stok Barang 
           </h1>
         </div>
         <!-- DataTables Example -->
@@ -10,7 +10,7 @@
           <div class="col-lg-12">
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
-              	<a href="main.php?hal=tambah_barang" class="btn btn-primary">Tambah</a>
+              	<a href="main.php?hal=pemesanan_barang" class="btn btn-primary">Buat Pemesanan</a>
                 <a href="" class="btn btn-danger">Hapus</a>
               </div>
               <div class="widget-content padded clearfix">

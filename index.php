@@ -1,13 +1,12 @@
-<?php include"config/cek_session.php";?>
+<?php #include"config/cek_session.php";?>
 <!DOCTYPE html>
 <html>
-  
 <!-- Mirrored from sharpandnimble.com/se7en/demo/login1.html by HTTrack Website Copier/3.x [XR&CO'2013], Tue, 29 Apr 2014 15:01:35 GMT -->
 <head>
     <title>
       Inventory - Login
     </title>
-    <link href="http://fonts.googleapis.com/css?family=Lato:100,300,400,700" media="all" rel="stylesheet" type="text/css" />
+    <link href="http://fonts.googleapis.com/cscs?family=Lato:100,300,400,700" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/bootstrap.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/font-awesome.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/se7en-font.css" media="all" rel="stylesheet" type="text/css" />
