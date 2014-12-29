@@ -88,7 +88,7 @@
                     <?php }?>
                   </tbody>
                 </table>
-                <button class="btn btn-danger" type="submit" name="submit">Cetak Pemesanan</button>
+                <button class="btn btn-danger" type="submit" name="submit">Proses Pemesanan</button>
                 </form>
               </div>
             </div>

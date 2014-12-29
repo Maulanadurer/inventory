@@ -39,7 +39,7 @@ if(isset($_POST['submit'])){
     $database->truncate(array("temp_pesan"));
     //if($resp == 0){
 //    }else{
-        header('location:../main.php?hal=pemesanan_barang');
+        header('location:../main.php?hal=laporan_pemesanan&kode='.$kode_pesan);
     //}
 }
 ?>

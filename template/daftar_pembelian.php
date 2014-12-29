@@ -59,6 +59,7 @@
                           <?php }else{?>
                           <a class="btn btn-xs btn-success" href="#">Dibeli</a>
                           <?php }?>
+                          <a class="btn btn-xs btn-warning" href="main.php?hal=laporan_pemesanan&kode=<?php echo $row->kode_pesan;?>">Dokumen Pemesanan</a>
                       </td>
                     </tr>
               <?php $i++; }?>

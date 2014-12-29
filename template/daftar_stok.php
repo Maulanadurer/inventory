@@ -11,7 +11,6 @@
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
               	<a href="main.php?hal=pemesanan_barang" class="btn btn-primary">Buat Pemesanan</a>
-                <a href="" class="btn btn-danger">Hapus</a>
               </div>
               <div class="widget-content padded clearfix">
                 <table class="table table-bordered table-striped" id="dataTable1">
