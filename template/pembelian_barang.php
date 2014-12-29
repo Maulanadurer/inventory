@@ -64,7 +64,7 @@
                     </th>
                   </thead>
                   <tbody>
-                    <?php $rows = $database->get_results("SELECT p.*,b.* FROM tb_detail_pemesanan p JOIN tb_barang b ON p.kode_barang=b.kode_barang");
+                    <?php $rows = $database->get_results("SELECT p.*,b.* FROM tb_detail_pemesanan p JOIN tb_barang b ON p.kode_barang=b.kode_barang AND p.kode_pesan='".$_GET['kode']."'");
                         if(count($rows)>0){?>
                     <?php $i = 1;
                           foreach($rows as $row){?>
