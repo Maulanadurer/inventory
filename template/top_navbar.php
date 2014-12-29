@@ -118,6 +118,12 @@
                     </p></a>
                     
                   </li>
+                  <li><a href="main.php?hal=daftar_distribusi">
+                    <p>
+                      Daftar Distribusi
+                    </p></a>
+                    
+                  </li>
                 </ul>
               </li>
               <li class="dropdown"><a data-toggle="dropdown" href="#">

@@ -25,6 +25,8 @@ if(isset($_POST['submit'])){
                   "status"=>"0",
                  );
     $resp = $database->insert("tb_permintaan",$data);
+
+
     $i = 0;
     foreach($kode_barang as $kode_brg){
         $detail = array(
@@ -36,6 +38,7 @@ if(isset($_POST['submit'])){
         $i++;
     }
     $database->truncate(array("temp_permintaan"));
+
     //if($resp == 0){
 //    }else{
         header('location:../main.php?hal=daftar_permintaan');

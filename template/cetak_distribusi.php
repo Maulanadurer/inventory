@@ -1,21 +1,21 @@
       <?php $database = SimplePDO::getInstance();?>
-      <?php $query = $database->get_row("SELECT p.*,s.* FROM tb_permintaan p JOIN tb_cabang s ON p.kode_cabang=s.kode_cabang WHERE id_permintaan=?", array($_GET['kode']));?>
+      <?php $query = $database->get_row("SELECT p.*,s.* FROM tb_distribusi_brg p JOIN tb_cabang s ON p.kode_cabang=s.kode_cabang WHERE id_distribusi=?", array($_GET['kode']));?>
         <div class="page-title">
           <h1>
-            Penjualan Barang
+            Distribusi Barang
           </h1>
         </div>
         <div class="row">
           <div class="col-lg-12">
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
-                <i class="fa fa-bars"></i>Permintaan
+                <i class="fa fa-bars"></i>Distribusi
               </div>
               <div class="widget-content padded">
                 <form action="proses/penjualan_barang.php" class="form-horizontal" method="post">
                 
                   <div class="form-group">
-                    <label class="control-label col-md-2">Nama Supplier</label>
+                    <label class="control-label col-md-2">Nama Cabang</label>
                     <div class="col-md-7">
                         <input class="form-control" id="disabledInput" type="text" name="kode_cabang" value="<?php echo $query->kode_cabang."|".$query->nama_cabang?>" />
                         <input type="hidden" name="id_permintaan" value="<?php echo $query->id_permintaan;?>" />

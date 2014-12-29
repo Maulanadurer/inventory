@@ -21,6 +21,7 @@ if(isset($_POST['submit'])){
                   "id_transaksi"=>$id_transaksi,
                   "kode_cabang"=>$kode_cabang,
                   "tgl_jual"=>"NOW()",
+                  "kode_admin"=>"ADM001",
                   "kode_jenistransaksijual"=>$jenis_transaksi,
                  );
     $resp = $database->insert("tb_penjualan",$data);
@@ -40,7 +41,6 @@ if(isset($_POST['submit'])){
                             "stok_awal"=>$stok->stok_barang,
                             "stok_akhir"=>$stok->stok_barang+$row->jumlah,
                             "kode_barang"=>$row->kode_barang,
-                            "kode_admin"=>"ADM001",
                             "id_transaksi"=>$id_transaksi,
                           );
         $database->insert("tb_logstokjual",$data_baru);
@@ -53,6 +53,26 @@ if(isset($_POST['submit'])){
     $where = array("id_permintaan"=>$faktur);
     $database->update("tb_permintaan", $update, $where, 1);
 
+    $id_distribusi = kodefikasi('tb_distribusi_brg','id_distribusi','DIS');
+    $data = array(
+                  "id_distribusi"=>$id_distribusi,
+                  "kode_cabang"=>$kode_cabang,
+                  "tgl_jual"=>"NOW()",
+                  "tgl_distribusi"=>"0000-00-00",
+                  "status"=>"0",
+                 );
+    $database->insert("tb_distribusi_brg",$data);
+    
+    $i = 0;
+    foreach($rows as $row){
+        $detail = array(
+                      "kode_barang"=>$row->kode_barang,
+                      "jumlah"=>$row->jumlah,
+                      "id_distribusi"=>$id_distribusi,
+                    );
+        $database->insert("tb_detail_distribusi",$detail);
+        $i++;
+    }
     //if($resp == 0){
 //    }else{
         header('location:../main.php?hal=daftar_permintaan');
