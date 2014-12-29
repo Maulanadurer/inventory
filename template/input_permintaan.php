@@ -14,7 +14,7 @@
                 <form action="proses/permintaan_temp.php" class="form-horizontal" method="post">
                 
                   <div class="form-group">
-                    <label class="control-label col-md-2">Nama Supplier</label>
+                    <label class="control-label col-md-2">Nama Cabang</label>
                     <div class="col-md-7">
                     <?php $query = $database->get_results("SELECT * FROM tb_cabang");?>
                         <select class="form-control" name="kode_cabang">
