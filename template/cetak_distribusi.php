@@ -12,13 +12,13 @@
                 <i class="fa fa-bars"></i>Distribusi
               </div>
               <div class="widget-content padded">
-                <form action="proses/penjualan_barang.php" class="form-horizontal" method="post">
+                <form action="proses/proses_distribusi.php" class="form-horizontal" method="post">
                 
                   <div class="form-group">
                     <label class="control-label col-md-2">Nama Cabang</label>
                     <div class="col-md-7">
                         <input class="form-control" id="disabledInput" type="text" name="kode_cabang" value="<?php echo $query->kode_cabang."|".$query->nama_cabang?>" />
-                        <input type="hidden" name="id_permintaan" value="<?php echo $query->id_permintaan;?>" />
+                        <input type="hidden" name="id_distribusi" value="<?php echo $query->id_distribusi;?>" />
                         <input type="hidden" name="kode_cabang" value="<?php echo $query->kode_cabang;?>" />
                     </div>
                   </div>
@@ -26,17 +26,17 @@
                   <div class="form-group">
                     <label class="control-label col-md-2">Jenis Transaksi</label>
                     <div class="col-md-7">
-                    <?php $q = $database->get_results("SELECT * FROM tb_jenistransaksijual");?>
-                        <select class="form-control" name="jenis_transaksi">
-                    <?php foreach($q as $row){?>
-                          <option value="<?php echo $row->kode_jenistransaksijual;?>"><?php echo $row->jenis_transaksijual;?></option>
+                        <select class="form-control" name="status">
+                        <?php $q = array("Packaging","On Progress","Delivered")?>
+                    <?php foreach($q as $key => $row){?>
+                          <option value="<?php echo $key;?>" <?php echo ($key==$query->status)?"selected":""?>><?php echo $row;?></option>
                     <?php }?>
                         </select>
                     </div>
                   </div>
                   
                   <div class="form-group">
-                    <label class="control-label col-md-2">Tanggal Permintaan</label>
+                    <label class="control-label col-md-2">Tanggal Penjaualan</label>
                     <div class="col-md-7">
                         <input class="form-control" id="disabledInput" type="text" name="tgl_jual" value="<?php echo $query->tgl_jual;?>"/>
                     </div>
@@ -64,7 +64,7 @@
                     </th>
                   </thead>
                   <tbody>
-                    <?php $rows = $database->get_results("SELECT p.*,b.* FROM tb_detail_permintaan p JOIN tb_barang b ON p.kode_barang=b.kode_barang WHERE id_permintaan='".$_GET['kode']."'");
+                    <?php $rows = $database->get_results("SELECT p.*,b.* FROM tb_detail_distribusi p JOIN tb_barang b ON p.kode_barang=b.kode_barang WHERE id_distribusi='".$_GET['kode']."'");
                         if(count($rows)>0){?>
                     <?php $i = 1;
                           foreach($rows as $row){?>
@@ -81,7 +81,7 @@
                     <?php }?>
                   </tbody>
                 </table>
-                    <button class="btn btn-primary" type="submit" name="submit">Proses Penjualan</button>
+                    <button class="btn btn-primary" type="submit" name="submit">Proses Distribusi</button>
                     <a href="main.php?hal=daftar_permintaan" class="btn btn-default-outline">Cancel</a>
                 </form>
               </div>

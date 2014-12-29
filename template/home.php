@@ -6,7 +6,7 @@
                 for($i=1;$i<=6;$i++){
                   $tmp = array();
                   $sum = 0;
-                  $hpenjualan = $database->get_results("SELECT jumlah, MONTH(tgl_jual) AS month, YEAR(tgl_jual) AS year FROM tb_penjualan WHERE MONTH(tgl_jual)='".$i."'");
+                  $hpenjualan = $database->get_results("SELECT MONTH(`tb_penjualan`.tgl_jual) AS month, YEAR(`tb_penjualan`.tgl_jual) AS year, (SELECT SUM(td.jumlah) FROM `tb_detail_penjualan` AS td JOIN `tb_penjualan` tp ON tp.id_transaksi=td.id_transaksi WHERE tp.`tgl_jual`=`tb_penjualan`.`tgl_jual` GROUP BY tp.`tgl_jual`) AS jumlah FROM `tb_penjualan` WHERE MONTH(`tb_penjualan`.tgl_jual)='".$i."'");
                   foreach($hpenjualan as $row){
                       $tmp[] = $row->jumlah;
                       $sum += $row->jumlah;

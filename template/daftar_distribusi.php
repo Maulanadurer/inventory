@@ -59,11 +59,12 @@
                         <?php echo $row->nama_cabang;?>
                       </td>
                       <td class="hidden-xs">
-                        <?php $w_status = ($row->status==0)?"minta":"jual";?>
-                        <?php if($w_status=="minta"){?>
+                        <?php if($row->status==0){?>
                         <a class="btn btn-xs btn-warning" href="main.php?hal=cetak_distribusi&kode=<?php echo $row->id_distribusi;?>">Packaging</a>
+                        <?php }else if($row->status==1){?>
+                        <a class="btn btn-xs btn-success" href="main.php?hal=cetak_distribusi&kode=<?php echo $row->id_distribusi;?>">On Progress</a>
                         <?php }else{?>
-                        <a class="btn btn-xs btn-success" href="#">Delivered</a>
+                        <a class="btn btn-xs btn-success" href="main.php?hal=cetak_distribusi&kode=<?php echo $row->id_distribusi;?>">Delivered</a>
                         <?php }?>
                       </td>
                     </tr>
