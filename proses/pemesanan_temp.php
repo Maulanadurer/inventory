@@ -1,9 +1,10 @@
 <?php require_once "../config/SimplePDO.php";
+require_once "../config/conf_file.php";
  $params = array(
-     'host' => 'localhost', 
-     'user' => 'root', 
-     'password' => '', 
-     'database' => 'db_inventory_scm'
+     'host' => host, 
+     'user' => user, 
+     'password' => password, 
+     'database' => database
  );
  
 //Set the options

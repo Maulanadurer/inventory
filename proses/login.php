@@ -1,12 +1,13 @@
 <?php
 if(isset($_POST['submit'])){
     require_once "../config/SimplePDO.php";
-     $params = array(
-         'host' => 'localhost', 
-         'user' => 'root', 
-         'password' => '', 
-         'database' => 'db_inventory_scm'
-     );
+require_once "../config/conf_file.php";
+ $params = array(
+     'host' => host, 
+     'user' => user, 
+     'password' => password, 
+     'database' => database
+ );
      
     //Set the options
     SimplePDO::set_options( $params );

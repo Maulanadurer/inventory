@@ -1,3 +1,6 @@
 <?php
-$base_url="http://127.0.0.1/inventory/";
+ define("host","localhost");
+ define("user","root");
+ define("password","");
+ define("database","db_inventory_scm");
 ?>
