@@ -18,7 +18,7 @@
     <!-- Login Screen -->
     <div class="login-wrapper">
       <div class="login-container">
-        <a href="#"><img width="100" height="30" src="images/logo-login%402x.png" /></a>
+        <a href="#">CV Cipta Mandiri Cimahi</a>
         <form action="proses/login.php" method="post">
           <div class="form-group">
             <input class="form-control" placeholder="Username or Email" type="text" name="username">
@@ -34,12 +34,6 @@
             </div>
           </div>
         </form>
-        <div class="social-login clearfix">
-          <a class="btn btn-primary pull-left facebook" href="index-2.html"><i class="fa fa-facebook"></i>Facebook login</a><a class="btn btn-primary pull-right twitter" href="index-2.html"><i class="fa fa-twitter"></i>Twitter login</a>
-        </div>
-        <p class="signup">
-          Don't have an account yet? <a href="signup1.html">Sign up now</a>
-        </p>
       </div>
     </div>
     <!-- End Login Screen -->
