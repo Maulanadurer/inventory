@@ -59,7 +59,7 @@
             $sdate = substr($startdate, 6,4)."-".substr($startdate, 3,2)."-".substr($startdate, 0,2);
             $edate = substr($enddate, 6,4)."-".substr($enddate, 3,2)."-".substr($enddate, 0,2);
             $month = array('Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember');
-            $data = $database->get_results("SELECT MONTH(`tgl_jual`) AS month,SUM(jumlah) AS jumlah FROM `tb_penjualan` WHERE `kode_barang` ='".$kode_barang."' AND `tgl_jual` BETWEEN '".$sdate."' AND '".$edate."' AND kode_cabang='".$kode_cabang."' GROUP BY MONTH(`tgl_jual`)");
+            $data = $database->get_results("SELECT MONTH(tpd.tgl_jual) AS month, (SELECT SUM(td.jumlah) FROM `tb_detail_penjualan` AS td JOIN `tb_penjualan` tp ON tp.id_transaksi=td.id_transaksi WHERE tp.`tgl_jual`=tpd.`tgl_jual` AND td.`kode_barang` ='".$kode_barang."'  GROUP BY tp.`tgl_jual`) AS jumlah FROM `tb_penjualan` AS tpd WHERE tpd.`tgl_jual` BETWEEN '".$sdate."' AND '".$edate."' AND tpd.kode_cabang='".$kode_cabang."' GROUP BY MONTH(tpd.tgl_jual)");
             foreach($data as $row){
               $jumlah_barang[]=$row->jumlah;
               $n_month[] = $row->month-1;
