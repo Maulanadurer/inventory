@@ -1,4 +1,5 @@
-<?php $query = mysql_query("SELECT * FROM tb_cabang") or die(mysql_error());?>
+<?php $database = SimplePDO::getInstance();
+      $query = $database->get_results( "SELECT * FROM tb_cabang" );?>
         <div class="page-title">
           <h1>
             Daftar Cabang
@@ -36,7 +37,7 @@
                     <th></th>
                   </thead>
                   <tbody>
-             <?php $i = 1; while($row=mysql_fetch_object($query)){?>
+             <?php $i = 1; foreach ($query as $row) {?>
                     <tr>
                       <td class="check hidden-xs">
                         <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_cabang;?>"><span></span></label>
@@ -58,7 +59,7 @@
                       </td>
                       <td class="actions">
                         <div class="action-buttons">
-                          <a class="table-actions" href="main.php?hal=ubah_cabang&id=<?php echo $row->kode_cabang;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_cabang.php?id=<?php echo $row->kode_cabang;?>"><i class="fa fa-trash-o"></i></a>
+                          <a class="table-actions" href="main.php?hal=ubah_cabang&kode=<?php echo $row->kode_cabang;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_cabang.php?kode=<?php echo $row->kode_cabang;?>"><i class="fa fa-trash-o"></i></a>
                         </div>
                       </td>
                     </tr>

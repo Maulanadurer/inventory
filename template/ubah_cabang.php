@@ -1,5 +1,5 @@
-<?php $data = mysql_query("SELECT * FROM tb_cabang WHERE kode_cabang='".$_GET['id']."'") or die(mysql_error());
-	  $row2 = mysql_fetch_object($data);
+<?php $database = SimplePDO::getInstance();
+    $row2 = $database->get_row("SELECT * FROM tb_cabang WHERE kode_cabang=?",array($_GET['kode']));
 ?>
 
 <div class="page-title">

@@ -15,10 +15,10 @@
     <?php include"template/javascript.php";?>
   </head>
   <body class="login1">
-    <!-- Login Screen -->
+    <!-- <a href="#"><img width="100" height="30" src="images/logo-login%402x.png" /></a> Login Screen -->
     <div class="login-wrapper">
       <div class="login-container">
-        <a href="#">CV Cipta Mandiri Cimahi</a>
+        <a href="#"><h2>CV Cipta Mandiri</h2></a>
         <form action="proses/login.php" method="post">
           <div class="form-group">
             <input class="form-control" placeholder="Username or Email" type="text" name="username">

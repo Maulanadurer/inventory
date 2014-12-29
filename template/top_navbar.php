@@ -141,6 +141,12 @@
                     </p></a>
                     
                   </li>
+                  <li><a href="main.php?hal=daftar_cabang">
+                    <p>
+                     Daftar Cabang
+                    </p></a>
+                    
+                  </li>
                 </ul>
               </li>
               <li class="dropdown"><a data-toggle="dropdown" href="#">
