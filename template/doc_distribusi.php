@@ -17,9 +17,9 @@ class PDF extends FPDF
 		     'database' => database ));
 		$database = SimplePDO::getInstance();
 		if($content == 0){
-			$row = $database->get_results("SELECT tdp.*, tb.* FROM tb_detail_pemesanan AS tdp JOIN tb_barang tb ON tb.kode_barang=tdp.kode_barang WHERE tdp.kode_pesan='".$_GET['kode']."'");
+			$row = $database->get_results("SELECT p.*,b.* FROM tb_detail_distribusi p JOIN tb_barang b ON p.kode_barang=b.kode_barang WHERE id_distribusi='".$_GET['kode']."'");
 		}else{
-			$row = $database->get_row( "SELECT ts.*, tp.* FROM tb_pemesanan tp JOIN tb_supplier ts ON ts.kode_supplier=tp.kode_suplier WHERE tp.kode_pesan = ? ", array($_GET['kode']) );
+			$row = $database->get_row("SELECT p.*,s.* FROM tb_distribusi_brg p JOIN tb_cabang s ON p.kode_cabang=s.kode_cabang WHERE id_distribusi=?", array($_GET['kode']));
 		}
 
 
@@ -46,20 +46,13 @@ class PDF extends FPDF
 		$this->SetFont('Arial','',12);
 		$data = $this->LoadData(1);
 		$this->Cell(0,35,'Kepada yth,',0,0,'L');
+		$this->Cell(0,35,'No Faktur :                        '.$data->id_distribusi,0,0,'R');
+		
 		$this->Ln(5);
-		$this->Cell(0,37,'Pimpinan '.$data->nama_supplier,0,0,'L');
+		$this->Cell(0,37,'Pimpinan '.$data->nama_cabang,0,0,'L');
+		$this->Cell(0,35,'Tanggal Pengiriman : '.$data->tgl_distribusi,0,0,'R');
 		$this->Ln(5);
-		$this->Cell(0,37,$data->alamat_supplier,0,0,'L');
-		$this->Ln(10);
-		$this->Cell(0,37,'Hal : Surat Pemesanan Barang',0,0,'L');
-		$this->Ln(20);
-		$this->Cell(0,37,'Dengan hormat,',0,0,'L');
-		$this->Ln(5);
-		$this->Cell(0,37,'Mengingat persediaan barang kami yang semakin menipis, maka kami bermaksud untuk ',0,0,'L');
-		$this->Ln(5);
-		$this->Cell(0,37,'memesan barang sebagai berikut:',0,0,'L');
-		// $pdf->Write(5,"Laporan Pemesanan Barang");
-		// Line break
+		$this->Cell(0,37,$data->alamat_cabang,0,0,'L');
 		$this->Ln(25);
 	}
 	// Colored table
@@ -89,11 +82,11 @@ class PDF extends FPDF
 			$this->Cell($w[0],6,$i,'LR',0,'C',$fill);
 			$this->Cell($w[1],6,$row->kode_barang,'LR',0,'L',$fill);
 			$this->Cell($w[2],6,$row->nama_barang,'LR',0,'L',$fill);
-			$this->Cell($w[3],6,$row->qty,'LR',0,'C',$fill);
+			$this->Cell($w[3],6,$row->jumlah,'LR',0,'C',$fill);
 			$this->Ln();
 			$fill = !$fill;
 			$i++;
-			$sum += $row->qty;
+			$sum += $row->jumlah;
 		}
 		// Closing line
 		// $this->Cell($w,6,$i,'LR',0,'C',$fill);
@@ -104,15 +97,15 @@ class PDF extends FPDF
 
 	function Signature()
 	{
-		$this->SetY(120);
+		$this->SetY(90);
 		$this->SetFont('Arial','',12);
-		$this->Cell(0,10,'Demikian surat ini kami buat, atas perhatian dan kerjasamanya kami sampaikan terimakasih.',0,0,'L');
-		$this->Ln(10);
-		$this->Cell(0,10,'Hormat kami,',0,0,'L');
+		$this->Cell(0,10,'Penerima,',0,0,'L');
+		$this->Cell(0,10,'Hormat kami,',0,0,'R');
 		$this->Ln(5);
-		$this->Cell(0,10,'CV Cipta Mandiri,',0,0,'L');
+		$this->Cell(0,10,'CV Cipta Mandiri,',0,0,'R');
 		$this->Ln(20);
-		$this->Cell(0,10,'Pimpinan',0,0,'L');
+		$this->Cell(0,10,'___________________',0,0,'L');
+		$this->Cell(0,10,'Pimpinan',0,0,'R');
 	}
 
 	function Footer()

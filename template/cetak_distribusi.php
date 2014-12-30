@@ -82,7 +82,8 @@
                   </tbody>
                 </table>
                     <button class="btn btn-primary" type="submit" name="submit">Proses Distribusi</button>
-                    <a href="main.php?hal=daftar_permintaan" class="btn btn-default-outline">Cancel</a>
+                    <a class="btn btn-success" href="template/doc_distribusi.php?kode=<?php echo $_GET['kode']; ?>" target="_blank">Cetak Dokumen</a>
+                    <a href="main.php?hal=daftar_distribusi" class="btn btn-default-outline">Cancel</a>
                 </form>
               </div>
             </div>
