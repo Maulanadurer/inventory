@@ -79,25 +79,16 @@
               <div class="col-md-4">
                 <div class="number">
                   <div class="icon visitors"></div>
-                  <?php echo $database->num_fields("tb_cabang")-1;?>
+                  <?php echo $database->num_rows("SELECT COUNT(kode_cabang) FROM tb_cabang WHERE kode_admin = ?", array( "ADM001" ));?>
                 </div>
                 <div class="text">
                   Cabang
                 </div>
               </div>
-<!--              <div class="col-md-3">
-                <div class="number">
-                  <div class="icon money"></div>
-                  <small>IDR</small>924,-
-                </div>
-                <div class="text">
-                  Stok Gudang
-                </div>
-              </div>-->
               <div class="col-md-4">
                 <div class="number">
                   <div class="icon chat-bubbles"></div>
-                  325
+                  <?php echo $database->num_rows("SELECT COUNT(kode_pesan) FROM tb_pemesanan WHERE status = ?", array( 1 ));?>
                 </div>
                 <div class="text">
                  Pesanan
