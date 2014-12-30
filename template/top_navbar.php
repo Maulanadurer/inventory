@@ -173,10 +173,10 @@
                     <a href="main.php?hal=laporan_distribusi">Distribusi</a>
                   </li>
                   <li>
-                    <a href="datatables-editable.html"> Pembelian</a>
+                    <a href="main.php?hal=laporan_pembelian"> Pembelian</a>
                   </li>
                   <li>
-                    <a href="datatables-editable.html"> Stok Barang</a>
+                    <a href="main.php?hal=laporan_stok"> Stok Barang</a>
                   </li>
                 </ul>
               </li>
