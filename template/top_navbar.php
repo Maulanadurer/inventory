@@ -1,3 +1,13 @@
+        
+        <?php $role = $_SESSION['level'];
+        $nav = 0;
+        if ($role == "gudang"){
+          $nav = 2;
+        }else if($role == "distribusi"){
+          $nav = 1;
+        }else{
+          $nav = 0;
+        }?>
         <div class="container-fluid top-bar">
           <div class="pull-right">
             <ul class="nav navbar-nav pull-right">
@@ -94,61 +104,80 @@
               <li><a data-toggle="dropdown" href="#">
                 <span aria-hidden="true" class="se7en-feed"></span>Pengolahan Data<b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                  <?php if($nav == 0 or $nav == 2){?>
                   <li><a href="main.php?hal=daftar_stok">
                     <p>
                       Daftar Stok Barang
                     </p></a>
                     
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 2){?>
                   <li><a href="main.php?hal=daftar_pembelian">
                     <p>
                       Daftar Pembelian
                     </p></a>
                     
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li><a href="main.php?hal=daftar_permintaan">
                     <p>
                       Daftar Permintaan
                     </p></a>
                     
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li><a href="main.php?hal=daftar_penjualan">
                     <p>
                       Daftar Penjualan
                     </p></a>
                     
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li><a href="main.php?hal=daftar_distribusi">
                     <p>
                       Daftar Distribusi
                     </p></a>
                     
                   </li>
+                  <?php }?>
                 </ul>
               </li>
+              <?php if($nav == 0){?>
               <li class="dropdown"><a data-toggle="dropdown" href="#">
                 <span aria-hidden="true" class="se7en-star"></span>Data Master<b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                <?php if($nav == 0){?>
                   <li><a href="main.php?hal=daftar_supplier">
                     <p>
                       Daftar Supplier
                     </p></a>
                     
                   </li>
+                <?php }?>
+                <?php if($nav == 0){?>
                   <li><a href="main.php?hal=daftar_barang">
                     <p>
                      Master Barang
                     </p></a>
                     
                   </li>
+                <?php }?>
+                <?php if($nav == 0){?>
                   <li><a href="main.php?hal=daftar_cabang">
                     <p>
                      Daftar Cabang
                     </p></a>
                     
                   </li>
+                <?php }?>
                 </ul>
               </li>
+              <?php }?>
+              <?php if($nav == 0 or $nav == 2){?>
               <li class="dropdown"><a data-toggle="dropdown" href="#">
                 <span aria-hidden="true" class="se7en-forms"></span>Peramalan<b class="caret"></b></a>
                 <ul class="dropdown-menu">
@@ -160,29 +189,42 @@
                   </li>
                 </ul>
               </li>
+              <?php }?>
               <li class="dropdown"><a data-toggle="dropdown" href="#">
                 <span aria-hidden="true" class="se7en-tables"></span>Laporan<b class="caret"></b></a>
                 <ul class="dropdown-menu">
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li>
-                    <a href="main.php?hal=laporan_penjualan">Penjualan</a>
+                    <a href="main.php?hal=laporan_jual">Penjualan</a>
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li>
                     <a href="main.php?hal=laporan_peramalan">Peramalan ARIMA</a>
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 1){?>
                   <li>
-                    <a href="main.php?hal=laporan_distribusi">Distribusi</a>
+                    <a href="main.php?hal=lap_distribusi">Distribusi</a>
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 2){?>
                   <li>
-                    <a href="main.php?hal=laporan_pembelian"> Pembelian</a>
+                    <a href="main.php?hal=lap_pembelian"> Pembelian</a>
                   </li>
+                  <?php }?>
+                  <?php if($nav == 0 or $nav == 2){?>
                   <li>
                     <a href="main.php?hal=laporan_stok"> Stok Barang</a>
                   </li>
+                  <?php }?>
                 </ul>
               </li>
+            <?php if($nav == 0){?>
              <li><a href="main.php?hal=daftar_user">
                 <span aria-hidden="true" class="se7en-gear"></span>Pengguna</a>
              </li>
+            <?php }?>
           </ul>
           </div>
         </div>

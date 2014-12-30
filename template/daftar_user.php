@@ -1,5 +1,5 @@
 <?php $database = SimplePDO::getInstance();
-      $query = $database->get_results("SELECT tc.*,tu.* FROM tb_user tu JOIN tb_cabang tc ON tu.kode_cabang = tc.kode_cabang"); ?>
+      $query = $database->get_results("SELECT * FROM tb_admin"); ?>
         <div class="page-title">
           <h1>
             Daftar User
@@ -11,7 +11,6 @@
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
                 <a href="main.php?hal=tambah_user" class="btn btn-primary">Tambah</a>
-                <a href="" class="btn btn-danger">Hapus</a>
               </div>
               <div class="widget-content padded clearfix">
                 <table class="table table-bordered table-striped" id="dataTable1">
@@ -38,7 +37,7 @@
                       Email User
                     </th>
                     <th>
-                        Nama Cabang
+                      Role
                     </th>
                     <th></th>
                   </thead>
@@ -46,32 +45,32 @@
              <?php $i = 1; foreach($query as $row){?>
                     <tr>
                       <td class="check hidden-xs">
-                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_user;?>"/><span></span></label>
+                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_admin;?>"/><span></span></label>
                       </td>
                       <td>
                       	<?php echo $i; ?>
                       </td>
                       <td>
-                        <?php echo $row->kode_user;?>
+                        <?php echo $row->kode_admin;?>
                       </td>
                       <td>
-                        <?php echo $row->username_user;?>
+                        <?php echo $row->username_admin;?>
                       </td>
                       <td>
-                        <?php echo $row->password_user;?>
+                        <?php echo $row->password_admin;?>
                       </td>
                       <td>
-                        <?php echo $row->nama_user;?>
+                        <?php echo $row->nama_admin;?>
                       </td>
                       <td>
-                        <?php echo $row->email_user;?>
+                        <?php echo $row->email_admin;?>
                       </td>
                       <td>
-                        <?php echo $row->nama_cabang;?>
+                        <?php echo $row->level;?>
                       </td>
                       <td class="actions">
                         <div class="action-buttons">
-                          <a class="table-actions" href="main.php?hal=ubah_user&id=<?php echo $row->kode_user;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_user.php?id=<?php echo $row->kode_user;?>"><i class="fa fa-trash-o"></i></a>
+                          <a class="table-actions" href="main.php?hal=ubah_user&kode=<?php echo $row->kode_admin;?>"><i class="fa fa-pencil"></i></a><a class="table-actions" href="proses/hapus_user.php?kode=<?php echo $row->kode_admin;?>"><i class="fa fa-trash-o"></i></a>
                         </div>
                       </td>
                     </tr>

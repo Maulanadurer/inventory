@@ -1,10 +1,14 @@
-<?php
-include"../config/cek_session.php";
-include"../config/koneksi.php";
-$data=mysql_query("DELETE FROM tb_user WHERE kode_user='".$_GET['id']."'") or die(mysql_error());
-if($data>0){
-	header('location:../main.php?hal=daftar_user&st=1');
-}else{
-	echo "Error";
-}
+<?php require_once "../config/SimplePDO.php";
+require_once "../config/conf_file.php";
+ $params = array(
+     'host' => host, 
+     'user' => user, 
+     'password' => password, 
+     'database' => database
+ );
+//Set the options
+SimplePDO::set_options( $params );
+$database = SimplePDO::getInstance();
+$database->delete("tb_admin",array("kode_admin"=>$_GET['kode']));
+header('location:../main.php?hal=daftar_user&st=1');
 ?>

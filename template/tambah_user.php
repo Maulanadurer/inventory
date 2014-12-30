@@ -42,17 +42,12 @@
             </div>
           </div>
             <div class="form-group">
-            <label class="control-label col-md-2">Nama Cabang</label>
+            <label class="control-label col-md-2">Role</label>
             <div class="col-md-7">
-              <select class="form-control" name="kode_cabang">
-                  <option value="--">Pilih Cabang</option>
-                  <?php
-                    $query = "SELECT * FROM tb_cabang";
-                    $result = mysql_query($query);
-                    while($row = mysql_fetch_object($result)){
-                  ?>
-              	<option value="<?php echo $row->kode_cabang; ?>"><?php echo $row->nama_cabang; ?></option>
-                    <?php } ?>
+              <select class="form-control" name="role">
+                  <option value="admin">Administrator</option>
+                  <option value="gudang">Bag. Gudang</option>
+                  <option value="distribusi">Bag. Distribusi</option>
               </select>
             </div>
           </div>

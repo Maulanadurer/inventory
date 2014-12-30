@@ -1,8 +1,8 @@
 <?php $database = SimplePDO::getInstance();
-      $query = $database->get_results("SELECT * FROM tb_penjualan tp JOIN tb_cabang tc ON tc.kode_cabang=tp.kode_cabang JOIN tb_jenistransaksijual tj ON tj.kode_jenistransaksijual=tp.kode_jenistransaksijual");?>
+      $query = $database->get_results( "SELECT p.*,s.* FROM tb_pemesanan p JOIN tb_supplier s ON p.kode_suplier=s.kode_supplier" );?>
         <div class="page-title">
           <h1>
-            Daftar Penjualan 
+            Daftar Pembelian Barang 
           </h1>
         </div>
         <!-- DataTables Example -->
@@ -10,6 +10,7 @@
           <div class="col-lg-12">
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
+                  <a class="btn btn-success" href="#" target="_blank">Cetak Laporan</a>
               </div>
               <div class="widget-content padded clearfix">
                 <table class="table table-bordered table-striped" id="dataTable1">
@@ -21,38 +22,32 @@
                       No
                     </th>
                     <th>
-                      No Transaksi
+                      Kode faktur
                     </th>
                     <th class="hidden-xs">
-                      Tanggal Transaksi
+                      Nama Supplier
                     </th>
                     <th class="hidden-xs">
-                      Jenis Transaksi
-                    </th>
-                    <th class="hidden-xs">
-                      Nama Cabang
+                      Tanggal Pembelian
                     </th>
                   </thead>
                   <tbody>
-             <?php $i = 1; foreach($query as $row){?>
+             <?php $i = 1; foreach($query as $row ){?>
                     <tr>
                       <td class="check hidden-xs">
-                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->id_transaksi;?>"><span></span></label>
+                        <label><input name="optionsRadios1" type="checkbox" value="<?php echo $row->kode_pesan;?>"/><span></span></label>
                       </td>
                       <td>
                           <?php echo $i;?>
                       </td>
-                      <td class="hidden-xs">
-                        <?php echo $row->id_transaksi;?>
+                      <td>
+                        <?php echo $row->kode_pesan;?>
+                      </td>
+                      <td>
+                        <?php echo $row->nama_supplier;?>
                       </td>
                       <td class="hidden-xs">
-                        <?php echo $row->tgl_jual;?>
-                      </td>
-                      <td class="hidden-xs">
-                        <?php echo $row->jenis_transaksijual;?>
-                      </td>
-                      <td class="hidden-xs">
-                        <?php echo $row->nama_cabang;?>
+                        <?php echo $row->tgl_beli;?>
                       </td>
                     </tr>
               <?php $i++; }?>
