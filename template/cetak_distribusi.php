@@ -41,7 +41,12 @@
                         <input class="form-control" id="disabledInput" type="text" name="tgl_jual" value="<?php echo $query->tgl_jual;?>"/>
                     </div>
                   </div>
-                  
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Tanggal Distribusi</label>
+                    <div class="col-md-7">
+                        <input class="form-control" data-date-autoclose="false" data-date-format="yyyy-mm-dd" id="dpd1" placeholder="Start date" type="text" name="tgl_distribusi" value="<?php echo $query->tgl_distribusi;?>"/>
+                    </div>
+                  </div>
                   <div class="form-group">
                     <label class="control-label col-md-2"></label>
                     <div class="col-md-7">

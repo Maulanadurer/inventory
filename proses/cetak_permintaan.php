@@ -15,13 +15,14 @@ if(isset($_POST['submit'])){
     $kode_barang = $_POST['kode_barang'];
     $kode_cabang = $_POST['kode_cabang'];
     $jumlah = $_POST['jumlah'];
+    $tgl = $_POST['tgl_permintaan'];
     
     
     $id_permintaan = kodefikasi('tb_permintaan','id_permintaan','POI');
     $data = array(
                   "id_permintaan"=>$id_permintaan,
                   "kode_cabang"=>$kode_cabang[0],
-                  "tgl_jual"=>"NOW()",
+                  "tgl_jual"=>$tgl,
                   "status"=>"0",
                  );
     $resp = $database->insert("tb_permintaan",$data);

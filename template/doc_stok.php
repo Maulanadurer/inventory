@@ -66,6 +66,7 @@ class PDF extends FPDF
 		$fill = false;
 		$i = 1;
 		$sum = 0;
+		$y = 0;
 		foreach($data as $row)
 		{
 			$this->Cell($w[0],6,$i,'LR',0,'C',$fill);
@@ -75,18 +76,19 @@ class PDF extends FPDF
 			$this->Ln();
 			$fill = !$fill;
 			$i++;
+			$y += 10;
 			$sum += $row->stok_barang;
 		}
 		// Closing line
 		// $this->Cell($w,6,$i,'LR',0,'C',$fill);
 		$this->Cell(array_sum($w),0,'','T');
-		$this->Signature();
+		$this->Signature($y);
 
 	}
 
-	function Signature()
+	function Signature($y)
 	{
-		$this->SetY(90);
+		$this->SetY(50+$y);
 		$this->SetFont('Arial','',12);
 		$this->Cell(0,10,'Hormat kami,',0,0,'R');
 		$this->Ln(5);

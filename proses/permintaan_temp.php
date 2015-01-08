@@ -15,11 +15,13 @@ if(isset($_POST['submit'])){
     $barang = explode("|",$_POST['kode_barang']);
     $kode_cabang = $_POST['kode_cabang'];
     $jumlah = $_POST['jumlah'];
+    $tgl_permintaan = $_POST['tgl_permintaan'];
     $data = array(
                   "kode"=>null,
                   "kode_barang"=>$barang[0],
                   "nama_barang"=>$barang[1],
                   "kode_cabang"=>$kode_cabang,
+                  "tanggal"=>$tgl_permintaan,
                   "jumlah"=>$jumlah
                 );
     $resp = $database->insert("temp_permintaan",$data);

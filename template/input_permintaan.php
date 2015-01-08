@@ -43,7 +43,14 @@
                       <input class="form-control" placeholder="Jumlah Pesanan" type="text" name="jumlah" />
                     </div>
                   </div>
-                  
+
+                  <div class="form-group">
+                    <label class="control-label col-md-2">Tanggal Permintaan</label>
+                    <div class="col-md-7">
+                        <input class="form-control" data-date-autoclose="false" data-date-format="yyyy-mm-dd" id="dpd1" placeholder="Start date" type="text" name="tgl_permintaan" value=""/>
+                    </div>
+                  </div>
+
                   <div class="form-group">
                     <label class="control-label col-md-2"></label>
                     <div class="col-md-7">
@@ -78,7 +85,7 @@
                         <td><?php echo $i;?></td>
                         <td><input type="hidden" name="kode_barang[]" value="<?php echo $row->kode_barang;?>"/><?php echo $row->kode_barang;?></td>
                         <td><input type="hidden" name="kode_cabang[]" value="<?php echo $row->kode_cabang;?>"/><?php echo $row->nama_barang;?></td>
-                        <td><input type="text" name="jumlah[]" value="<?php echo $row->jumlah;?>"/></td>
+                        <td><input type="hidden" name="tgl_permintaan" value="<?php echo $row->tanggal;?>"/><input type="text" name="jumlah[]" value="<?php echo $row->jumlah;?>"/></td>
                         <td><a href="proses/hapus_permintaan.php?kode=<?php echo $row->kode;?>"><i class="fa fa-cut"></i></a></td>
                     </tr>
 

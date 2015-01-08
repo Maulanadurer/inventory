@@ -26,13 +26,13 @@
                   </div>
                 
                   <div class="form-group">
-                    <label class="control-label col-md-2">Nama Barang</label>
+                    <label class="control-label col-md-2">Nama Cabang</label>
                     <div class="col-md-7">
-                    <?php $query = $database->get_results("SELECT * FROM tb_barang");?>
-                        <select class="form-control" name="kode_barang">
-                          <option value="all">Semua Barang</option>
+                    <?php $query = $database->get_results("SELECT * FROM tb_cabang");?>
+                        <select class="form-control" name="kode_cabang">
+                          <option value="all">Semua Cabang</option>
                     <?php foreach($query as $row){?>
-                          <option value="<?php echo $row->kode_barang.'|'.$row->nama_barang;?>"><?php echo $row->nama_barang;?></option>
+                          <option value="<?php echo $row->kode_cabang;?>"><?php echo $row->kode_cabang.'|'.$row->nama_cabang;?></option>
                     <?php }?>
                         </select>
                     </div>
@@ -73,10 +73,15 @@
                       $startdate = $_POST['sdate'];
                       $enddate = $_POST['edate'];
                       $sdate = substr($startdate, 6,4)."-".substr($startdate, 3,2)."-".substr($startdate, 0,2);
-                      $edate = substr($enddate, 6,4)."-".substr($enddate, 3,2)."-".substr($enddate, 0,2); 
+                      $edate = substr($enddate, 6,4)."-".substr($enddate, 3,2)."-".substr($enddate, 0,2);
+                      $where = "";
+                      if($_POST['kode_cabang']!='all'){
+                        $where = " AND tp.kode_cabang='".$_POST['kode_cabang']."'";
+                      }
                       $rows = $database->get_results("SELECT * FROM tb_penjualan tp JOIN tb_cabang tc ON tc.kode_cabang=tp.kode_cabang 
                                                       JOIN tb_jenistransaksijual tj ON tj.kode_jenistransaksijual=tp.kode_jenistransaksijual 
-                                                      WHERE tp.tgl_jual BETWEEN '".$sdate."' AND '".$edate."'");?>
+                                                      WHERE tp.tgl_jual BETWEEN '".$sdate."' AND '".$edate."' ".$where."");
+                                                      ?>
                     <?php if(count($rows)>0){?>
                     <?php $i = 1;
                           foreach($rows as $row){?>
@@ -108,7 +113,7 @@
                   <?php }?>
                   </tbody>
                 </table>
-                <button class="btn btn-danger" type="submit" name="submit">Cetak Laporan</button>
+                <a class="btn btn-success" href="template/docs_penjualan.php" target="_blank">Cetak Laporan</a>
               </div>
             </div>
           </div>

@@ -38,7 +38,7 @@
                   <div class="form-group">
                     <label class="control-label col-md-2">Tanggal Pemesanan</label>
                     <div class="col-md-7">
-                        <input class="form-control" id="disabledInput" type="text" name="tgl_pesan" value="<?php echo $query->tgl_beli;?>"/>
+                        <input class="form-control" data-date-autoclose="false" data-date-format="yyyy-mm-dd" id="dpd1" placeholder="Start date" type="text" name="tgl_pesan" value="<?php echo $query->tgl_beli;?>"/>
                     </div>
                   </div>
                   
