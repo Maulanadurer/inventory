@@ -113,87 +113,44 @@
               </div>
             </div>
             <script type="text/javascript">
-
-            /*
-            # =============================================================================
-            #   Sparkline Linechart JS
-            # =============================================================================
-            */
-
-            (function() {
-              $(document).ready(function() {
-                var option = {
-                  url:'proses/ar.php',
-                  type:'post',
-                  clearForm: true
-                  // target:''
-                };
-                $('#forecast').submit(function() {
-                  $(this).ajaxSubmit(options);
-                    alert("Thank you for your comment!");
-                  return false;
-                }); 
-                /*
-                # =============================================================================
-                #   Sparkline Linechart JS
-                # =============================================================================
-                */
-
-                var $alpha, $container, $container2, addEvent, buildMorris, checkin, checkout, d, date, handleDropdown, initDrag, m, now, nowTemp, timelineAnimate, y;
-                $("#barcharts").sparkline([<?php foreach($acf as $i){echo $i.',';}?>], {
-                  type: "bar",
-                  height: "150",
-                  barSpacing: 4,
-                  barWidth: 20,
-                  barColor: "#5cf5c3",
-                  highlightColor: "#89D1E6"
+            $(function () {
+                $('#pacf_chart').highcharts({
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Data PACF Dan ACF'
+                    },
+                    xAxis: {
+                        categories: ['1', '2', '3', '4', '5','6']
+                    },
+                    credits: {
+                        enabled: false
+                    },
+                    series: [{
+                        name: 'ACF',
+                        data: [<?php echo implode($acf, ",")?>]
+                    }, {
+                        name: 'PACF',
+                        data: [<?php echo implode($pacf, ",")?>]
+                    }]
                 });
-                $("#pacf").sparkline([<?php foreach($pacf as $i){echo $i.',';}?>], {
-                  type: "bar",
-                  height: "150",
-                  barSpacing: 4,
-                  barWidth: 20,
-                  barColor: "#5cf5c3",
-                  highlightColor: "#89D1E6"
-                });
-
-              });
-
-            }).call(this);
+            });
 
             </script>
             <!-- End Pie Graph 1 -->
           </div>
           <div class="row">
-            <div class="col-lg-6">
+            <div class="col-lg-12">
               <div class="widget-container">
                 <div class="heading">
                   <i class="fa fa-bar-chart-o"></i>Grafik ACF
                 </div>
                 <div class="widget-content padded text-center">
-                  <div class="chart-graph">
-                    <div id="barcharts">
-                      Loading...
-                    </div>
-                  </div>
+                    <div id="pacf_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                 </div>
               </div>
             </div>
-            <div class="col-lg-6">
-              <div class="widget-container">
-                <div class="heading">
-                  <i class="fa fa-bar-chart-o"></i>Grafik PACF
-                </div>
-                <div class="widget-content padded text-center">
-                  <div class="chart-graph">
-                    <div id="pacf">
-                      Loading...
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
           <?php }else{?>
             <div class="row">
               <div class="col-lg-12">

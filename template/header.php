@@ -4,19 +4,15 @@
     <link href="stylesheets/se7en-font.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/isotope.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/jquery.fancybox.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="stylesheets/fullcalendar.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="stylesheets/wizard.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/select2.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/morris.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/datatables.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/datepicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/timepicker.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="stylesheets/colorpicker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/bootstrap-switch.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/bootstrap-editable.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/daterange-picker.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/typeahead.css" media="all" rel="stylesheet" type="text/css" />
-    <link href="stylesheets/summernote.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/ladda-themeless.min.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/social-buttons.css" media="all" rel="stylesheet" type="text/css" />
     <link href="stylesheets/pygments.css" media="all" rel="stylesheet" type="text/css" />
@@ -27,3 +23,6 @@
     <link href="stylesheets/color/gray.css" media="all" rel="alternate stylesheet" title="gray-theme" type="text/css" />
     <link href="stylesheets/jquery.fileupload-ui.css" media="screen" rel="stylesheet" type="text/css" />
     <link href="stylesheets/dropzone.css" media="screen" rel="stylesheet" type="text/css" />
+    <style type="text/css">
+    ${demo.css}
+    </style>

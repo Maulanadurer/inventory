@@ -17,12 +17,14 @@ if(isset($_POST['submit'])){
     $nama_barang = $_POST['nama_barang'];
     $deskripsi = $_POST['deskripsi'];
     $stok_barang = $_POST['stok_barang'];
+    $stok_aman = $_POST['stok_aman'];
     $data = array(
                   "kode_barang"=>kodefikasi('tb_barang','kode_barang','BRG'),
                   "nama_barang"=>$nama_barang,
                   "deskripsi_barang"=>$deskripsi,
                   "stok_barang"=>$stok_barang,
                   "kode_admin"=>"ADM001",
+                  "safety_stock"=>$stok_aman,
                 );
     $database->insert("tb_barang",$data);
     header('location:../main.php?hal=daftar_barang&st=1');

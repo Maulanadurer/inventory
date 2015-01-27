@@ -32,6 +32,9 @@
                     </th>
                     <th class="hidden-xs">
                       Stok Barang
+                    </th class="hidden-xs">
+                    <th>
+                      Status
                     </th>
                   </thead>
                   <tbody>
@@ -54,6 +57,18 @@
                       </td>
                       <td class="hidden-xs">
                         <?php echo $row->stok_barang;?>
+                      </td>
+                      <td>
+                        <?php if(($row->stok_barang-$row->safety_stock)<=150){?>
+                        <a class="btn btn-xs btn-danger" href="main.php?hal=pemesanan_barang&kode=<?php echo $row->kode_barang;?>">
+                        Stok Kosong</a>
+                        <?php }else if($row->stok_barang<=$row->safety_stock){?>
+                        <a class="btn btn-xs btn-warning" href="main.php?hal=pemesanan_barang&kode=<?php echo $row->kode_barang;?>">
+                        Stok Menipis</a>
+                        <?php }else{?>
+                        <a class="btn btn-xs btn-success" href="main.php?hal=pemesanan_barang&kode=<?php echo $row->kode_barang;?>">
+                        Stok Aman</a>
+                        <?php }?>
                       </td>
                     </tr>
               <?php $i++; }?>

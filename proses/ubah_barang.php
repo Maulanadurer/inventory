@@ -14,12 +14,14 @@ if(isset($_POST['submit'])){
 	$kode_barang = $_POST['kode_barang'];
 	$nama_barang = $_POST['nama_barang'];
 	$deskripsi = $_POST['deskripsi'];
-	$stok_barang = $_POST['stok_barang'];
+    $stok_barang = $_POST['stok_barang'];
+	$stok_aman = $_POST['stok_aman'];
     $update = array(
                      "nama_barang"=>$nama_barang,
                      "deskripsi_barang"=>$deskripsi,
                      "stok_barang"=>$stok_barang,
                      "kode_admin"=>"ADM001",
+                     "safety_stock"=>$stok_aman,
                    );
     $u_where = array("kode_barang"=>$kode_barang);
     $database->update("tb_barang",$update,$u_where);

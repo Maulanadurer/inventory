@@ -28,10 +28,17 @@
                   <div class="form-group">
                     <label class="control-label col-md-2">Nama Barang</label>
                     <div class="col-md-7">
-                    <?php $query = $database->get_results("SELECT * FROM tb_barang");?>
+                    <?php $query = $database->get_results("SELECT * FROM tb_barang");
+                      $kode_barang = "";
+                      if(isset($_GET['kode'])){
+                        $kode_barang = $_GET['kode'];
+                      }
+                    ?>
                         <select class="form-control" name="kode_barang">
                     <?php foreach($query as $row){?>
-                          <option value="<?php echo $row->kode_barang.'|'.$row->nama_barang;?>"><?php echo $row->nama_barang;?></option>
+                          <option value="<?php echo $row->kode_barang.'|'.$row->nama_barang;?>" <?php echo ($kode_barang==$row->kode_barang)?"selected='selected'":""; ?>>
+                             <?php echo $row->nama_barang;?>
+                          </option>
                     <?php }?>
                         </select>
                     </div>

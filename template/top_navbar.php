@@ -107,7 +107,7 @@
                   <?php if($nav == 0 or $nav == 2){?>
                   <li><a href="main.php?hal=daftar_stok">
                     <p>
-                      Daftar Stok Barang
+                      Monitoring Stok Barang
                     </p></a>
                     
                   </li>

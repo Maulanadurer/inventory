@@ -10,7 +10,7 @@
         <i class="fa fa-bars"></i>Administrator
       </div>
       <div class="widget-content padded">
-        <form action="proses/tambah_admin.php" class="form-horizontal" method="post">
+        <form id="validate-form" action="proses/tambah_admin.php" class="form-horizontal" method="post">
             <div class="form-group">
             <label class="control-label col-md-2">Username</label>
             <div class="col-md-7">

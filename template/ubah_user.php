@@ -51,7 +51,7 @@
             <label class="control-label col-md-2">Role</label>
             <div class="col-md-7">
               <select class="form-control" name="role">
-                  <option value="admin">Administrator</option>
+                  <option value="admin" >Administrator</option>
                   <option value="gudang">Bag. Gudang</option>
                   <option value="distribusi">Bag. Distribusi</option>
               </select>

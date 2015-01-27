@@ -1,5 +1,5 @@
 <?php
-$data = array(573,487,732,1131,450,597);
+$data = array(200,210,199,230,210,198);
 $data2 = array(-88.67,-174.67,70.33,469.33,-211.67,-64.67);
 $month = array('Januari','February','Maret','April','Mei','Juni');
 function acf($data){
@@ -183,9 +183,26 @@ function data_ma($data){
     $data_ma = array();
     for($i=0;$i<count($data)-1;$i++){
         $data_ma[]=$data[$i]-$data[$i+1];
+        // echo $data[$i]."-".$data[$i+1]."=".$data_ma[$i]."<br/>";
     }
     return $data_ma;
 }
+
+// echo "<pre>";
+// print_r(array_1($data));
+// print_r(array_2($data));
+// print_r(array_y($data));
+// print_r(array_2(data_ma($data)));
+// $zz1_ar = perkalian_matriks(array_1($data),array_2($data));
+// $z1y_ar = perkalian_matriks(array_1($data),array_y($data));
+// $ar = perkalian_matriks(accent($zz1_ar),$z1y_ar);
+// print_r($ar);
+// $zz1_ma = perkalian_matriks(array_1(data_ma($data)),array_2(data_ma($data)));
+// print_r(accent($zz1_ma));
+// $z1y_ma = perkalian_matriks(array_1(data_ma($data)), array_y(data_ma($data)));
+// print_r($z1y_ma);
+// $ma = perkalian_matriks(accent($zz1_ma),$z1y_ma);
+// print_r($ma);
 //print_r(pacf($data,acf($data)));
 //print_r(acf($data));
 //print_r(sacf($data2,acf($data)));
@@ -194,5 +211,5 @@ function data_ma($data){
 //	echo $d/$sacf[$i].",";
 //}
 //=(1+(2*(C10^2))^0.5)/((6-1+1)^0.5)
-
+// echo "</pre>";
 ?>

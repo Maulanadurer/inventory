@@ -14,13 +14,14 @@ if(isset($_POST['submit'])){
     require_once "../config/kodefikasi.php";
     $faktur = $_POST['id_permintaan'];
     $jenis_transaksi= $_POST['jenis_transaksi'];
-    $kode_cabang= $_POST['kode_cabang'];   
+    $kode_cabang= $_POST['kode_cabang'];  
+    $tgl_jual= $_POST['tgl_jual'];   
     
     $id_transaksi = kodefikasi('tb_penjualan','id_transaksi','POP');
     $data = array(
                   "id_transaksi"=>$id_transaksi,
                   "kode_cabang"=>$kode_cabang,
-                  "tgl_jual"=>"NOW()",
+                  "tgl_jual"=>$tgl_jual,
                   "kode_admin"=>"ADM001",
                   "kode_jenistransaksijual"=>$jenis_transaksi,
                  );
@@ -37,7 +38,7 @@ if(isset($_POST['submit'])){
         $stok = $database->get_row("SELECT * FROM tb_barang WHERE kode_barang=?",array($row->kode_barang));
         $data_baru = array(
                             "num_log"=>null,
-                            "tgl_update"=>"NOW()",
+                            "tgl_update"=>$tgl_jual,
                             "stok_awal"=>$stok->stok_barang,
                             "stok_akhir"=>$stok->stok_barang+$row->jumlah,
                             "kode_barang"=>$row->kode_barang,
@@ -57,7 +58,7 @@ if(isset($_POST['submit'])){
     $data = array(
                   "id_distribusi"=>$id_distribusi,
                   "kode_cabang"=>$kode_cabang,
-                  "tgl_jual"=>"NOW()",
+                  "tgl_jual"=>$tgl_jual,
                   "tgl_distribusi"=>"0000-00-00",
                   "status"=>"0",
                  );

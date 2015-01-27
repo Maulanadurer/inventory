@@ -107,11 +107,12 @@
                 <i class="fa fa-bar-chart-o"></i>Penjualan
               </div>
               <div class="widget-content padded text-center">
-                <div class="graph-container">
-                  <div class="caption"></div>
-                  <div class="graph" id="hero-graph"></div>
+                <!-- <div class="graph-container"> -->
+<!--                   <div class="caption"></div>
+                  <div class="graph" id="hero-graph"></div> -->
+                  <?php include "template/chart_home.php";?>
                   <!-- Line Chart:Morris -->
-                </div>
+               <!--  </div> -->
               </div>
             </div>
           </div>

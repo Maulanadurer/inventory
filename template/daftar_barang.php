@@ -34,6 +34,9 @@
                     <th class="hidden-xs">
                       Stok Barang
                     </th>
+                    <th class="hidden-xs">
+                      Stok Aman
+                    </th>
                     <th></th>
                   </thead>
                   <tbody>
@@ -56,6 +59,9 @@
                       </td>
                       <td class="hidden-xs">
                         <?php echo $row->stok_barang;?>
+                      </td>
+                      <td class="hidden-xs">
+                        <?php echo $row->safety_stock;?>
                       </td>
                       <td class="actions">
                         <div class="action-buttons">

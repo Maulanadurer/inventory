@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 29, 2014 at 05:21 AM
+-- Generation Time: Jan 27, 2015 at 09:06 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS `tb_admin` (
 --
 
 INSERT INTO `tb_admin` (`kode_admin`, `username_admin`, `password_admin`, `nama_admin`, `email_admin`, `level`) VALUES
-('ADM001', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'mimin', 'mimin@gmail.com', 'admin');
+('ADM001', 'admin', '21232f297a57a5a743894a0e4a801fc3', 'mimin', 'mimin@gmail.com', 'admin'),
+('ADM002', 'gudang', '202446dd1d6028084426867365b0c7a1', 'gudang', 'gudang@gmail.com', 'gudang'),
+('ADM003', 'distribusi', '4a8a4a98ff830e7b6681ea6d94157507', 'distribusi', 'distribusi@gmail.com', 'distribusi');
 
 -- --------------------------------------------------------
 
@@ -56,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `tb_barang` (
   `deskripsi_barang` varchar(250) NOT NULL,
   `stok_barang` int(11) NOT NULL,
   `kode_admin` varchar(30) NOT NULL,
+  `safety_stock` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`kode_barang`),
   KEY `kode_satuan` (`kode_admin`),
   KEY `admin_id` (`kode_admin`)
@@ -65,9 +68,14 @@ CREATE TABLE IF NOT EXISTS `tb_barang` (
 -- Dumping data for table `tb_barang`
 --
 
-INSERT INTO `tb_barang` (`kode_barang`, `nama_barang`, `deskripsi_barang`, `stok_barang`, `kode_admin`) VALUES
-('BRG001', 'Clutch Cover (Tutup kopling)', 'Kopling ini adalah produk yang bagus.', 1500, 'ADM001'),
-('BRG002', 'Clutch Disc (Pelat Kopling)', 'Pelat Kopling ini adalah produk yang bagus.', 1500, 'ADM001');
+INSERT INTO `tb_barang` (`kode_barang`, `nama_barang`, `deskripsi_barang`, `stok_barang`, `kode_admin`, `safety_stock`) VALUES
+('BRG001', 'Clutch Cover (Tutup kopling)', 'Kopling ini adalah produk yang bagus.', 850, 'ADM001', 300),
+('BRG002', 'Clutch Disc (Pelat Kopling)', 'Pelat Kopling ini adalah produk yang bagus.', 1550, 'ADM001', 200),
+('BRG003', 'Water Pump', 'Water Pump ini adalah barang yang bagus', 200, 'ADM001', 300),
+('BRG004', 'Klem Acu', 'Klem Acu ini adalah barang yang bagus', 1050, 'ADM001', 250),
+('BRG005', 'Master Rem', 'Master Rem ini adalah barang  yang bagus', 850, 'ADM001', 200),
+('BRG006', 'Pinion Gear', 'Pinion Gear ini adalah barang yang bagus', 350, 'ADM001', 250),
+('BRG007', 'Side Gear', 'Side Gear ini adalah barang yang bagus', 900, 'ADM001', 300);
 
 -- --------------------------------------------------------
 
@@ -90,10 +98,9 @@ CREATE TABLE IF NOT EXISTS `tb_cabang` (
 --
 
 INSERT INTO `tb_cabang` (`kode_cabang`, `nama_cabang`, `alamat_cabang`, `telepon_cabang`, `kode_admin`) VALUES
-('CAB001', 'Barokah Jaya', 'Cihanjuang', '0224567890', 'ADM001'),
-('CAB002', 'Cabang Polban', 'Ciwaruga', '0221234567', 'ADM001'),
-('CAB003', 'Family', 'Cikutra', '022345678', 'ADM001'),
-('CAB004', 'Kurnia Motor', 'Cigadung', '0221234532', 'ADM001');
+('CAB001', 'Barokah', 'Cihanjuang', '0224567890', 'ADM001'),
+('CAB002', 'Irian', 'Ciwaruga', '0221234567', 'ADM001'),
+('CAB003', 'Jaya Sparepart', 'Cikutra', '022345678', 'ADM001');
 
 -- --------------------------------------------------------
 
@@ -110,7 +117,19 @@ CREATE TABLE IF NOT EXISTS `tb_detailpembelian` (
   KEY `kode_barang` (`kode_barang`,`faktur_beli`),
   KEY `kode_jenistransaksibeli` (`faktur_beli`),
   KEY `faktur_beli` (`faktur_beli`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tb_detailpembelian`
+--
+
+INSERT INTO `tb_detailpembelian` (`num_beli`, `qty_beli`, `kode_barang`, `faktur_beli`) VALUES
+(1, 200, 'BRG003', 'POB001'),
+(2, 100, 'BRG005', 'POB001'),
+(3, 250, 'BRG002', 'POB001'),
+(4, 400, 'BRG001', 'POB002'),
+(5, 400, 'BRG002', 'POB002'),
+(6, 300, 'BRG004', 'POB002');
 
 -- --------------------------------------------------------
 
@@ -134,7 +153,29 @@ INSERT INTO `tb_detail_distribusi` (`id_distribusi`, `kode_barang`, `jumlah`) VA
 ('DIS001', 'BRG001', 100),
 ('DIS001', 'BRG002', 150),
 ('DIS002', 'BRG001', 150),
-('DIS002', 'BRG002', 135);
+('DIS002', 'BRG002', 135),
+('DIS003', 'BRG003', 150),
+('DIS003', 'BRG005', 150),
+('DIS004', 'BRG007', 100),
+('DIS005', 'BRG002', 100),
+('DIS005', 'BRG003', 100),
+('DIS006', 'BRG001', 200),
+('DIS007', 'BRG003', 100),
+('DIS008', 'BRG001', 200),
+('DIS009', 'BRG006', 150),
+('DIS010', 'BRG004', 100),
+('DIS010', 'BRG005', 100),
+('DIS010', 'BRG003', 200),
+('DIS011', 'BRG004', 150),
+('DIS011', 'BRG006', 100),
+('DIS012', 'BRG006', 200),
+('DIS013', 'BRG001', 200),
+('DIS013', 'BRG002', 200),
+('DIS014', 'BRG003', 300),
+('DIS014', 'BRG001', 300),
+('DIS015', 'BRG002', 300),
+('DIS015', 'BRG004', 200),
+('DIS016', 'BRG001', 150);
 
 -- --------------------------------------------------------
 
@@ -148,6 +189,18 @@ CREATE TABLE IF NOT EXISTS `tb_detail_pemesanan` (
   `qty` int(11) NOT NULL,
   KEY `kode_pesan` (`kode_pesan`,`kode_barang`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_detail_pemesanan`
+--
+
+INSERT INTO `tb_detail_pemesanan` (`kode_pesan`, `kode_barang`, `qty`) VALUES
+('POS001', 'BRG003', 200),
+('POS001', 'BRG005', 100),
+('POS001', 'BRG002', 250),
+('POS002', 'BRG001', 400),
+('POS002', 'BRG002', 400),
+('POS002', 'BRG004', 300);
 
 -- --------------------------------------------------------
 
@@ -171,7 +224,29 @@ INSERT INTO `tb_detail_penjualan` (`id_transaksi`, `kode_barang`, `jumlah`) VALU
 ('POP001', 'BRG001', 100),
 ('POP001', 'BRG002', 150),
 ('POP002', 'BRG001', 150),
-('POP002', 'BRG002', 135);
+('POP002', 'BRG002', 135),
+('POP003', 'BRG003', 150),
+('POP003', 'BRG005', 150),
+('POP004', 'BRG007', 100),
+('POP005', 'BRG002', 100),
+('POP005', 'BRG003', 100),
+('POP006', 'BRG001', 200),
+('POP007', 'BRG003', 100),
+('POP008', 'BRG001', 200),
+('POP009', 'BRG006', 150),
+('POP010', 'BRG004', 100),
+('POP010', 'BRG005', 100),
+('POP010', 'BRG003', 200),
+('POP011', 'BRG004', 150),
+('POP011', 'BRG006', 100),
+('POP012', 'BRG006', 200),
+('POP013', 'BRG001', 200),
+('POP013', 'BRG002', 200),
+('POP014', 'BRG003', 300),
+('POP014', 'BRG001', 300),
+('POP015', 'BRG002', 300),
+('POP015', 'BRG004', 200),
+('POP016', 'BRG001', 150);
 
 -- --------------------------------------------------------
 
@@ -195,7 +270,29 @@ INSERT INTO `tb_detail_permintaan` (`id_permintaan`, `kode_barang`, `jumlah`) VA
 ('POI001', 'BRG001', 100),
 ('POI001', 'BRG002', 150),
 ('POI002', 'BRG001', 150),
-('POI002', 'BRG002', 135);
+('POI002', 'BRG002', 135),
+('POI003', 'BRG003', 150),
+('POI003', 'BRG005', 150),
+('POI004', 'BRG007', 100),
+('POI005', 'BRG001', 200),
+('POI006', 'BRG003', 100),
+('POI007', 'BRG001', 200),
+('POI008', 'BRG006', 150),
+('POI009', 'BRG002', 100),
+('POI009', 'BRG003', 100),
+('POI010', 'BRG004', 100),
+('POI010', 'BRG005', 100),
+('POI010', 'BRG003', 200),
+('POI011', 'BRG004', 150),
+('POI011', 'BRG006', 100),
+('POI012', 'BRG006', 200),
+('POI013', 'BRG002', 300),
+('POI013', 'BRG004', 200),
+('POI014', 'BRG003', 300),
+('POI014', 'BRG001', 300),
+('POI015', 'BRG001', 200),
+('POI015', 'BRG002', 200),
+('POI016', 'BRG001', 150);
 
 -- --------------------------------------------------------
 
@@ -218,8 +315,22 @@ CREATE TABLE IF NOT EXISTS `tb_distribusi_brg` (
 --
 
 INSERT INTO `tb_distribusi_brg` (`id_distribusi`, `kode_cabang`, `tgl_jual`, `tgl_distribusi`, `status`) VALUES
-('DIS001', 'CAB001', '2014-12-29', '2014-12-29', 1),
-('DIS002', 'CAB002', '2014-12-29', '2014-12-29', 1);
+('DIS001', 'CAB001', '2013-01-25', '2013-01-29', 2),
+('DIS002', 'CAB002', '2013-01-25', '2013-01-29', 1),
+('DIS003', 'CAB003', '2013-04-29', '2013-04-30', 0),
+('DIS004', 'CAB001', '2013-03-29', '2014-12-29', 1),
+('DIS005', 'CAB001', '2013-03-29', '0000-00-00', 0),
+('DIS006', 'CAB001', '2013-04-29', '0000-00-00', 0),
+('DIS007', 'CAB001', '2013-05-29', '0000-00-00', 0),
+('DIS008', 'CAB001', '2013-05-25', '0000-00-00', 0),
+('DIS009', 'CAB001', '2013-04-29', '0000-00-00', 0),
+('DIS010', 'CAB001', '2013-06-29', '0000-00-00', 0),
+('DIS011', 'CAB001', '0000-00-00', '0000-00-00', 0),
+('DIS012', 'CAB001', '2013-06-29', '0000-00-00', 0),
+('DIS013', 'CAB001', '2015-01-25', '0000-00-00', 0),
+('DIS014', 'CAB002', '2013-02-27', '0000-00-00', 0),
+('DIS015', 'CAB003', '2013-02-27', '0000-00-00', 0),
+('DIS016', 'CAB001', '2013-02-12', '0000-00-00', 0);
 
 -- --------------------------------------------------------
 
@@ -280,7 +391,19 @@ CREATE TABLE IF NOT EXISTS `tb_logstokbeli` (
   KEY `kode_barang` (`kode_barang`,`kode_admin`,`faktur_beli`),
   KEY `kode_admin` (`kode_admin`),
   KEY `faktur_beli` (`faktur_beli`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+
+--
+-- Dumping data for table `tb_logstokbeli`
+--
+
+INSERT INTO `tb_logstokbeli` (`num_log`, `tgl_update`, `jam_update`, `stok_awal`, `stok_akhir`, `kode_barang`, `kode_admin`, `faktur_beli`) VALUES
+(1, '2014-12-29', '00:00:00', 1000, 1200, 'BRG003', 'ADM001', 'POB001'),
+(2, '2014-12-29', '00:00:00', 1000, 1100, 'BRG005', 'ADM001', 'POB001'),
+(3, '2014-12-29', '00:00:00', 1500, 1750, 'BRG002', 'ADM001', 'POB001'),
+(4, '2015-01-08', '00:00:00', 1100, 1500, 'BRG001', 'ADM001', 'POB002'),
+(5, '2015-01-08', '00:00:00', 1650, 2050, 'BRG002', 'ADM001', 'POB002'),
+(6, '2015-01-08', '00:00:00', 950, 1250, 'BRG004', 'ADM001', 'POB002');
 
 -- --------------------------------------------------------
 
@@ -298,7 +421,7 @@ CREATE TABLE IF NOT EXISTS `tb_logstokjual` (
   PRIMARY KEY (`num_log`),
   KEY `kode_barang` (`kode_barang`,`id_transaksi`),
   KEY `faktur_jual` (`id_transaksi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=31 ;
 
 --
 -- Dumping data for table `tb_logstokjual`
@@ -308,7 +431,29 @@ INSERT INTO `tb_logstokjual` (`num_log`, `tgl_update`, `stok_awal`, `stok_akhir`
 (5, '2013-01-29 09:50:23', 200, 300, 'BRG001', 'POP001'),
 (6, '2013-01-29 09:50:23', 150, 300, 'BRG002', 'POP001'),
 (7, '2013-01-25 09:50:23', 100, 250, 'BRG001', 'POP002'),
-(8, '2013-01-25 09:50:23', 0, 135, 'BRG002', 'POP002');
+(8, '2013-01-25 09:50:23', 0, 135, 'BRG002', 'POP002'),
+(9, '2014-12-29 18:22:22', 1200, 1350, 'BRG003', 'POP003'),
+(10, '2014-12-29 18:22:22', 1100, 1250, 'BRG005', 'POP003'),
+(11, '2014-12-29 18:23:06', 1000, 1100, 'BRG007', 'POP004'),
+(12, '2014-12-29 18:30:11', 1750, 1850, 'BRG002', 'POP005'),
+(13, '2014-12-29 18:30:11', 1050, 1150, 'BRG003', 'POP005'),
+(14, '2014-12-29 18:30:23', 1500, 1700, 'BRG001', 'POP006'),
+(15, '2014-12-29 18:30:31', 950, 1050, 'BRG003', 'POP007'),
+(16, '2014-12-29 18:30:37', 1300, 1500, 'BRG001', 'POP008'),
+(17, '2014-12-29 18:30:44', 800, 950, 'BRG006', 'POP009'),
+(18, '2014-12-29 18:30:54', 1200, 1300, 'BRG004', 'POP010'),
+(19, '2014-12-29 18:30:55', 950, 1050, 'BRG005', 'POP010'),
+(20, '2014-12-29 18:30:55', 850, 1050, 'BRG003', 'POP010'),
+(21, '2014-12-29 18:31:03', 1100, 1250, 'BRG004', 'POP011'),
+(22, '2014-12-29 18:31:03', 650, 750, 'BRG006', 'POP011'),
+(23, '2014-12-29 18:31:09', 550, 750, 'BRG006', 'POP012'),
+(24, '2015-01-25 06:50:50', 1500, 1700, 'BRG001', 'POP013'),
+(25, '2015-01-25 06:50:50', 2050, 2250, 'BRG002', 'POP013'),
+(26, '2013-02-27 00:00:00', 650, 950, 'BRG003', 'POP014'),
+(27, '2013-02-27 00:00:00', 1300, 1600, 'BRG001', 'POP014'),
+(28, '2013-02-27 00:00:00', 1850, 2150, 'BRG002', 'POP015'),
+(29, '2013-02-27 00:00:00', 1250, 1450, 'BRG004', 'POP015'),
+(30, '2013-02-12 00:00:00', 1000, 1150, 'BRG001', 'POP016');
 
 -- --------------------------------------------------------
 
@@ -326,6 +471,14 @@ CREATE TABLE IF NOT EXISTS `tb_pembelian` (
   KEY `kode_jenistransaksibeli` (`kode_jenistransaksibeli`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `tb_pembelian`
+--
+
+INSERT INTO `tb_pembelian` (`faktur_beli`, `tgl_beli`, `kode_supplier`, `kode_jenistransaksibeli`) VALUES
+('POB001', '2014-12-29', 'SUP001', 'JENB001'),
+('POB002', '2015-01-08', 'SUP001', 'JENB001');
+
 -- --------------------------------------------------------
 
 --
@@ -340,6 +493,14 @@ CREATE TABLE IF NOT EXISTS `tb_pemesanan` (
   PRIMARY KEY (`kode_pesan`),
   KEY `kode_suplier` (`kode_suplier`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tb_pemesanan`
+--
+
+INSERT INTO `tb_pemesanan` (`kode_pesan`, `kode_suplier`, `tgl_beli`, `status`) VALUES
+('POS001', 'SUP001', '2014-12-29', 1),
+('POS002', 'SUP001', '2015-01-08', 1);
 
 -- --------------------------------------------------------
 
@@ -364,7 +525,21 @@ CREATE TABLE IF NOT EXISTS `tb_penjualan` (
 
 INSERT INTO `tb_penjualan` (`id_transaksi`, `tgl_jual`, `kode_cabang`, `kode_admin`, `kode_jenistransaksijual`) VALUES
 ('POP001', '2013-01-29', 'CAB001', 'ADM001', 'JENJ001'),
-('POP002', '2013-01-25', 'CAB002', 'ADM001', 'JENJ001');
+('POP002', '2013-01-25', 'CAB002', 'ADM001', 'JENJ001'),
+('POP003', '2013-02-27', 'CAB003', 'ADM001', 'JENJ001'),
+('POP004', '2013-04-28', 'CAB001', 'ADM001', 'JENJ001'),
+('POP005', '2013-03-29', 'CAB001', 'ADM001', 'JENJ001'),
+('POP006', '2013-03-07', 'CAB001', 'ADM001', 'JENJ001'),
+('POP007', '2013-04-29', 'CAB001', 'ADM001', 'JENJ001'),
+('POP008', '2013-05-29', 'CAB001', 'ADM001', 'JENJ001'),
+('POP009', '2013-05-16', 'CAB001', 'ADM001', 'JENJ001'),
+('POP010', '2013-06-23', 'CAB001', 'ADM001', 'JENJ001'),
+('POP011', '2013-06-06', 'CAB001', 'ADM001', 'JENJ001'),
+('POP012', '2013-04-04', 'CAB001', 'ADM001', 'JENJ001'),
+('POP013', '2015-01-25', 'CAB001', 'ADM001', 'JENJ001'),
+('POP014', '2013-02-27', 'CAB002', 'ADM001', 'JENJ001'),
+('POP015', '2013-02-27', 'CAB003', 'ADM001', 'JENJ001'),
+('POP016', '2013-02-12', 'CAB001', 'ADM001', 'JENJ001');
 
 -- --------------------------------------------------------
 
@@ -422,7 +597,7 @@ INSERT INTO `tb_peramalan` (`id_peramalan`, `kode_barang`, `by_month`, `jumlah`,
 
 CREATE TABLE IF NOT EXISTS `tb_permintaan` (
   `id_permintaan` varchar(30) NOT NULL,
-  `tgl_jual` datetime NOT NULL,
+  `tgl_jual` date NOT NULL,
   `kode_cabang` varchar(30) NOT NULL,
   `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_permintaan`),
@@ -434,8 +609,22 @@ CREATE TABLE IF NOT EXISTS `tb_permintaan` (
 --
 
 INSERT INTO `tb_permintaan` (`id_permintaan`, `tgl_jual`, `kode_cabang`, `status`) VALUES
-('POI001', '2013-01-29 09:50:23', 'CAB001', 1),
-('POI002', '2013-01-25 09:50:23', 'CAB002', 1);
+('POI001', '2013-01-29', 'CAB001', 1),
+('POI002', '2013-01-25', 'CAB002', 1),
+('POI003', '2014-12-29', 'CAB003', 1),
+('POI004', '2014-12-29', 'CAB001', 1),
+('POI005', '2014-12-29', 'CAB001', 1),
+('POI006', '2014-12-29', 'CAB001', 1),
+('POI007', '2014-12-29', 'CAB001', 1),
+('POI008', '2014-12-29', 'CAB001', 1),
+('POI009', '2014-12-29', 'CAB001', 1),
+('POI010', '2014-12-29', 'CAB001', 1),
+('POI011', '2014-12-29', 'CAB001', 1),
+('POI012', '2014-12-29', 'CAB001', 1),
+('POI013', '2015-01-08', 'CAB003', 1),
+('POI014', '2013-02-27', 'CAB002', 1),
+('POI015', '2013-02-27', 'CAB001', 1),
+('POI016', '2013-02-12', 'CAB001', 1);
 
 -- --------------------------------------------------------
 
@@ -457,7 +646,7 @@ CREATE TABLE IF NOT EXISTS `tb_supplier` (
 --
 
 INSERT INTO `tb_supplier` (`kode_supplier`, `nama_supplier`, `alamat_supplier`, `kode_admin`) VALUES
-('SUP001', 'Mitra Jaya Motor', 'A.H.Yani', 'ADM001');
+('SUP001', 'Mitra Jaya', 'Jln.A.Yani', 'ADM001');
 
 -- --------------------------------------------------------
 
@@ -485,8 +674,7 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
 INSERT INTO `tb_user` (`kode_user`, `username_user`, `password_user`, `nama_user`, `email_user`, `kode_cabang`, `kode_admin`) VALUES
 ('USR001', 'user1', '24c9e15e52afc47c225b757e7bee1f9d', 'User Satu', 'user1@yahoo.com', 'CAB001', 'ADM001'),
 ('USR002', 'user2', '7e58d63b60197ceb55a1c487989a3720', 'User Dua', 'user2@windowslive.com', 'CAB002', 'ADM001'),
-('USR003', 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'User Tiga', 'user3@gmail.com', 'CAB003', 'ADM001'),
-('USR004', 'user4', '3f02ebe3d7929b091e3d8ccfde2f3bc6', 'User Empat', 'user4@live.com', 'CAB004', 'ADM001');
+('USR003', 'user3', '92877af70a45fd6a2ed7fe81e1236b78', 'User Tiga', 'user3@gmail.com', 'CAB003', 'ADM001');
 
 -- --------------------------------------------------------
 
@@ -499,6 +687,7 @@ CREATE TABLE IF NOT EXISTS `temp_permintaan` (
   `kode_barang` varchar(30) NOT NULL,
   `kode_cabang` varchar(30) NOT NULL,
   `nama_barang` varchar(100) NOT NULL,
+  `tanggal` date NOT NULL,
   `jumlah` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`kode`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -545,8 +734,8 @@ ALTER TABLE `tb_detailpembelian`
 -- Constraints for table `tb_detail_distribusi`
 --
 ALTER TABLE `tb_detail_distribusi`
-  ADD CONSTRAINT `tb_detail_distribusi_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `tb_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_detail_distribusi_ibfk_1` FOREIGN KEY (`id_distribusi`) REFERENCES `tb_distribusi_brg` (`id_distribusi`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_detail_distribusi_ibfk_1` FOREIGN KEY (`id_distribusi`) REFERENCES `tb_distribusi_brg` (`id_distribusi`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_detail_distribusi_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `tb_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_detail_pemesanan`
@@ -558,8 +747,8 @@ ALTER TABLE `tb_detail_pemesanan`
 -- Constraints for table `tb_detail_penjualan`
 --
 ALTER TABLE `tb_detail_penjualan`
-  ADD CONSTRAINT `tb_detail_penjualan_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_penjualan` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_detail_penjualan_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `tb_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `tb_detail_penjualan_ibfk_2` FOREIGN KEY (`kode_barang`) REFERENCES `tb_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_detail_penjualan_ibfk_3` FOREIGN KEY (`id_transaksi`) REFERENCES `tb_penjualan` (`id_transaksi`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tb_detail_permintaan`

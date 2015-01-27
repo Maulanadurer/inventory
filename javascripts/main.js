@@ -308,44 +308,7 @@
     $(window).resize(function() {
       return linechartResize();
     });
-    /*
-    # =============================================================================
-    #   Form wizard
-    # =============================================================================
-    */
 
-    $("#wizard").bootstrapWizard({
-      nextSelector: ".btn-next",
-      previousSelector: ".btn-previous",
-      onNext: function(tab, navigation, index) {
-        var $current, $percent, $total;
-        if (index === 1) {
-          if (!$("#name").val()) {
-            $("#name").focus();
-            $("#name").addClass("has-error");
-            return false;
-          }
-        }
-        $total = navigation.find("li").length;
-        $current = index + 1;
-        $percent = ($current / $total) * 100;
-        return $("#wizard").find(".progress-bar").css("width", $percent + "%");
-      },
-      onPrevious: function(tab, navigation, index) {
-        var $current, $percent, $total;
-        $total = navigation.find("li").length;
-        $current = index + 1;
-        $percent = ($current / $total) * 100;
-        return $("#wizard").find(".progress-bar").css("width", $percent + "%");
-      },
-      onTabShow: function(tab, navigation, index) {
-        var $current, $percent, $total;
-        $total = navigation.find("li").length;
-        $current = index + 1;
-        $percent = ($current / $total) * 100;
-        return $("#wizard").find(".progress-bar").css("width", $percent + "%");
-      }
-    });
     /*
     # =============================================================================
     #   DataTables
@@ -446,171 +409,6 @@
         normalizeFunction: "polynomial"
       });
     }
-    /*
-    # =============================================================================
-    #   Full Calendar
-    # =============================================================================
-    */
-
-    date = new Date();
-    d = date.getDate();
-    m = date.getMonth();
-    y = date.getFullYear();
-    initDrag = function(el) {
-      /*
-      # create an Event Object (http://arshaw.com/fullcalendar/docs/event_data/Event_Object/)
-      # it doesn't need to have a start or end
-      */
-
-      var eventObject;
-      eventObject = {
-        title: $.trim(el.text())
-      };
-      /*
-      # store the Event Object in the DOM element so we can get to it later
-      */
-
-      el.data("eventObject", eventObject);
-      /*
-      # make the event draggable using jQuery UI
-      */
-
-      return el.draggable({
-        zIndex: 999,
-        revert: true,
-        revertDuration: 0
-      });
-    };
-    addEvent = function(title, priority) {
-      var html;
-      title = (title.length === 0 ? "Untitled Event" : title);
-      priority = (priority.length === 0 ? "default" : priority);
-      html = $("<div data-class=\"label label-" + priority + "\" class=\"external-event label label-" + priority + "\">" + title + "</div>");
-      jQuery("#event_box").append(html);
-      return initDrag(html);
-    };
-    $("#external-events div.external-event").each(function() {
-      return initDrag($(this));
-    });
-    $("#event_add").click(function() {
-      var priority, title;
-      title = $("#event_title").val();
-      priority = $("#event_priority").val();
-      return addEvent(title, priority);
-    });
-    /*
-    # modify chosen options
-    */
-
-    handleDropdown = function() {
-      $("#event_priority_chzn .chzn-search").hide();
-      $("#event_priority_chzn_o_1").html("<span class=\"label label-default\">" + $("#event_priority_chzn_o_1").text() + "</span>");
-      $("#event_priority_chzn_o_2").html("<span class=\"label label-success\">" + $("#event_priority_chzn_o_2").text() + "</span>");
-      $("#event_priority_chzn_o_3").html("<span class=\"label label-info\">" + $("#event_priority_chzn_o_3").text() + "</span>");
-      $("#event_priority_chzn_o_4").html("<span class=\"label label-warning\">" + $("#event_priority_chzn_o_4").text() + "</span>");
-      return $("#event_priority_chzn_o_5").html("<span class=\"label label-important\">" + $("#event_priority_chzn_o_5").text() + "</span>");
-    };
-    $("#event_priority_chzn").click(handleDropdown);
-    /*
-    # predefined events
-    */
-
-    addEvent("My Event 1", "primary");
-    addEvent("My Event 2", "success");
-    addEvent("My Event 3", "info");
-    addEvent("My Event 4", "warning");
-    addEvent("My Event 5", "danger");
-    addEvent("My Event 6", "default");
-    $("#calendar").fullCalendar({
-      header: {
-        left: "prev,next today",
-        center: "title",
-        right: "month,agendaWeek,agendaDay"
-      },
-      editable: true,
-      droppable: true,
-      drop: function(date, allDay) {
-        /*
-        # retrieve the dropped element's stored Event Object
-        */
-
-        var copiedEventObject, originalEventObject;
-        originalEventObject = $(this).data("eventObject");
-        /*
-        # we need to copy it, so that multiple events don't have a reference to the same object
-        */
-
-        copiedEventObject = $.extend({}, originalEventObject);
-        /*
-        # assign it the date that was reported
-        */
-
-        copiedEventObject.start = date;
-        copiedEventObject.allDay = allDay;
-        copiedEventObject.className = $(this).attr("data-class");
-        /*
-        # render the event on the calendar
-        # the last `true` argument determines if the event "sticks" (http://arshaw.com/fullcalendar/docs/event_rendering/renderEvent/)
-        */
-
-        $("#calendar").fullCalendar("renderEvent", copiedEventObject, true);
-        /*
-        # is the "remove after drop" checkbox checked?
-        # if so, remove the element from the "Draggable Events" list
-        */
-
-        if ($("#drop-remove").is(":checked")) {
-          return $(this).remove();
-        }
-      },
-      events: [
-        {
-          title: "All Day Event",
-          start: new Date(y, m, 1),
-          className: "label label-default"
-        }, {
-          title: "Long Event",
-          start: new Date(y, m, d - 5),
-          end: new Date(y, m, d - 2),
-          className: "label label-success"
-        }, {
-          id: 999,
-          title: "Repeating Event",
-          start: new Date(y, m, d - 3, 16, 0),
-          allDay: false,
-          className: "label label-default"
-        }, {
-          id: 999,
-          title: "Repeating Event",
-          start: new Date(y, m, d + 4, 16, 0),
-          allDay: false,
-          className: "label label-important"
-        }, {
-          title: "Meeting",
-          start: new Date(y, m, d, 10, 30),
-          allDay: false,
-          className: "label label-info"
-        }, {
-          title: "Lunch",
-          start: new Date(y, m, d, 12, 0),
-          end: new Date(y, m, d, 14, 0),
-          allDay: false,
-          className: "label label-warning"
-        }, {
-          title: "Birthday Party",
-          start: new Date(y, m, d + 1, 19, 0),
-          end: new Date(y, m, d + 1, 22, 30),
-          allDay: false,
-          className: "label label-success"
-        }, {
-          title: "Click for Google",
-          start: new Date(y, m, 28),
-          end: new Date(y, m, 29),
-          url: "http://google.com/",
-          className: "label label-warning"
-        }
-      ]
-    });
     /*
     # =============================================================================
     #   Isotope
@@ -1081,11 +879,6 @@
       showSeconds: true,
       showMeridian: false
     });
-    $("#cp1").colorpicker({
-      format: "hex"
-    });
-    $("#cp2").colorpicker();
-    $("#cp3").colorpicker();
     /*
     # =============================================================================
     #   Skycons
@@ -1110,33 +903,6 @@
 
     $(window).load(function() {
       return $(".login-container").addClass("active");
-    });
-    /*
-    # =============================================================================
-    #   FitVids
-    # =============================================================================
-    */
-
-    $(".timeline-content").fitVids();
-    /*
-    # =============================================================================
-    #   Timeline animation
-    # =============================================================================
-    */
-
-    timelineAnimate = function(elem) {
-      return $(".timeline.animated li").each(function(i) {
-        var bottom_of_object, bottom_of_window;
-        bottom_of_object = $(this).position().top + $(this).outerHeight();
-        bottom_of_window = $(window).scrollTop() + $(window).height();
-        if (bottom_of_window > bottom_of_object) {
-          return $(this).addClass("active");
-        }
-      });
-    };
-    timelineAnimate();
-    $(window).scroll(function() {
-      return timelineAnimate();
     });
     /*
     # =============================================================================
@@ -1175,24 +941,6 @@
     #   Ladda loading buttons
     # =============================================================================
     */
-
-    Ladda.bind(".ladda-button:not(.progress-demo)", {
-      timeout: 2000
-    });
-    Ladda.bind(".ladda-button.progress-demo", {
-      callback: function(instance) {
-        var interval, progress;
-        progress = 0;
-        return interval = setInterval(function() {
-          progress = Math.min(progress + Math.random() * 0.1, 1);
-          instance.setProgress(progress);
-          if (progress === 1) {
-            instance.stop();
-            return clearInterval(interval);
-          }
-        }, 200);
-      }
-    });
     /*
     # =============================================================================
     #   Dropzone File Upload

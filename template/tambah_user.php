@@ -10,35 +10,35 @@
         <i class="fa fa-bars"></i>User
       </div>
       <div class="widget-content padded">
-        <form action="proses/tambah_user.php" class="form-horizontal" method="post">
+        <form action="proses/tambah_user.php" role="form" data-toggle="validator" class="form-horizontal"  method="post">
             <div class="form-group">
             <label class="control-label col-md-2">Username</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="username" type="text" name="username" />
+              <input class="form-control" id="firstname" type="text" name="username" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Password</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="password" type="text" name="password" />
+              <input class="form-control" id="password" type="password" name="password" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Confirm Password</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="confirm password" type="text" name="c_password" />
+              <input class="form-control" id="confirm_password" type="text" name="c_password" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Nama User</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="nama user" type="text" name="nama_user" />
+              <input class="form-control"  type="text" name="nama_user" />
             </div>
           </div>
           <div class="form-group">
             <label class="control-label col-md-2">Email User</label>
             <div class="col-md-7">
-              <input class="form-control" placeholder="email user" type="text" name="email_user" />
+              <input class="form-control" type="text" name="email_user" />
             </div>
           </div>
             <div class="form-group">
