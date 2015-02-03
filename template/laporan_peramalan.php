@@ -104,7 +104,8 @@
                         <?php 
                           $dr = $ar[0][0]+$jumlah*$ar[1][0];
                           $mr = $ma[0][0]+$jumlah*$ma[1][0];
-                          $arima = $ar[0][0]+$jumlah*$ar[1][0]-$jumlah*$ma[1][0];
+                          // $arima = $ar[0][0]+$jumlah*$ar[1][0]-$jumlah*$ma[1][0];
+                          $arima = $dr+$dr-$jumlah;
                         ?>
                         <?php 
                           $result_ar[] = $dr; 
@@ -168,189 +169,69 @@
             </div>
             <div class="row">
                   <!-- End Pie Graph 1 -->
-                  <script type="text/javascript">
-                  /*
-                  # =============================================================================
-                  #   Sparkline Linechart JS
-                  # =============================================================================
-                  */
-
-                  (function() {
-                    var linechartResize;
-                    
-                    linechartResize = function() {
-                      $("#ar").sparkline([300,<?php foreach($jumlah_barang as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#a5e1ff",
-                        fillColor: "rgba(241, 251, 255, 0.9)",
-                        lineWidth: 2,
-                        spotColor: "#a5e1ff",
-                        minSpotColor: "#bee3f6",
-                        maxSpotColor: "#a5e1ff",
-                        highlightSpotColor: "#80cff4",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0
-                      });
-                      $("#ar").sparkline([300,<?php foreach($result_ar as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#cfee74",
-                        fillColor: "rgba(244, 252, 225, 0.5)",
-                        lineWidth: 2,
-                        spotColor: "#b9e72a",
-                        minSpotColor: "#bfe646",
-                        maxSpotColor: "#b9e72a",
-                        highlightSpotColor: "#b9e72a",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0,
-                        composite: true
-                      });
-                      $("#ma").sparkline([300,<?php foreach($jumlah_barang as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#a5e1ff",
-                        fillColor: "rgba(241, 251, 255, 0.9)",
-                        lineWidth: 2,
-                        spotColor: "#a5e1ff",
-                        minSpotColor: "#bee3f6",
-                        maxSpotColor: "#a5e1ff",
-                        highlightSpotColor: "#80cff4",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0
-                      });
-                      $("#ma").sparkline([300,<?php foreach($result_ma as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#cfee74",
-                        fillColor: "rgba(244, 252, 225, 0.5)",
-                        lineWidth: 2,
-                        spotColor: "#b9e72a",
-                        minSpotColor: "#bfe646",
-                        maxSpotColor: "#b9e72a",
-                        highlightSpotColor: "#b9e72a",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0,
-                        composite: true
-                      });
-                      $("#arima").sparkline([300,<?php foreach($jumlah_barang as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#a5e1ff",
-                        fillColor: "rgba(241, 251, 255, 0.9)",
-                        lineWidth: 2,
-                        spotColor: "#a5e1ff",
-                        minSpotColor: "#bee3f6",
-                        maxSpotColor: "#a5e1ff",
-                        highlightSpotColor: "#80cff4",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0
-                      });
-                      $("#arima").sparkline([300,<?php foreach($result_arima as $i => $jumlah){echo $jumlah.",";} ?>300], {
-                        type: "line",
-                        width: "100%",
-                        height: "226",
-                        lineColor: "#cfee74",
-                        fillColor: "rgba(244, 252, 225, 0.5)",
-                        lineWidth: 2,
-                        spotColor: "#b9e72a",
-                        minSpotColor: "#bfe646",
-                        maxSpotColor: "#b9e72a",
-                        highlightSpotColor: "#b9e72a",
-                        highlightLineColor: "#cccccc",
-                        spotRadius: 6,
-                        chartRangeMin: 0,
-                        composite: true
-                      });                    
-                    };
-
-                    $(document).ready(function() {
-                      /*
-                      # =============================================================================
-                      #   Sparkline Linechart JS
-                      # =============================================================================
-                      */
-
-                      var $alpha, $container, $container2, addEvent, buildMorris, checkin, checkout, d, date, handleDropdown, initDrag, m, now, nowTemp, timelineAnimate, y;
-                      $(".sparkslim").sparkline('html', {
-                        type: "line",
-                        width: "100",
-                        height: "30",
-                        lineColor: "#adadad",
-                        fillColor: "rgba(244, 252, 225, 0.0)",
-                        lineWidth: 2,
-                        spotColor: "#909090",
-                        minSpotColor: "#909090",
-                        maxSpotColor: "#909090",
-                        highlightSpotColor: "#666",
-                        highlightLineColor: "#666",
-                        spotRadius: 0,
-                        chartRangeMin: 0
-                      });
-                       /*
-                      # =============================================================================
-                      #   Sparkline Resize Script
-                      # =============================================================================
-                      */
-
-                      linechartResize();
-                      $(window).resize(function() {
-                        return linechartResize();
-                      });
+                <script type="text/javascript">
+                $(function () {
+                    $('#arima_chart').highcharts({
+                        title: {
+                            text: 'Data Peramalan',
+                            x: -20 //center
+                        },
+                        subtitle: {
+                            text: '',
+                            x: -20
+                        },
+                        xAxis: {
+                            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                                'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+                        },
+                        yAxis: {
+                            title: {
+                                text: 'Penjualan'
+                            },
+                            plotLines: [{
+                                value: 0,
+                                width: 1,
+                                color: '#808080'
+                            }]
+                        },
+                        tooltip: {
+                            valueSuffix: ''
+                        },
+                        legend: {
+                            layout: 'vertical',
+                            align: 'right',
+                            verticalAlign: 'middle',
+                            borderWidth: 0
+                        },
+                        series: [{
+                            name: 'AR',
+                            data: [<?php echo implode($result_ar, ",");?>]
+                        },
+                        {
+                            name: 'MA',
+                            data: [<?php echo implode($result_ma, ",");?>]
+                        },
+                        {
+                            name: 'ARIMA',
+                            data: [<?php echo implode($result_armia, ",");?>]
+                        }
+                        ]
                     });
+                });
 
-                  }).call(this);
-
-                  </script>
+                </script>
                 <div class="col-lg-12">
                   <div class="widget-container fluid-height">
-                    <div class="col-lg-4">
+                    <div class="col-lg-12">
                       <div class="widget-container">
                         <div class="heading">
-                          <i class="fa fa-bar-chart"></i>AR
+                          <i class="fa fa-bar-chart"></i>Forecasting
                         </div>
                         <div class="widget-content padded">
-                          <div id="ar">
-                            Loading...
-                          </div>
+                          <div id="arima_chart" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
                         </div>
                       </div>
                     </div>
-                    <div class="col-lg-4">
-                      <div class="widget-container">
-                        <div class="heading">
-                          <i class="fa fa-bar-chart"></i>MA
-                        </div>
-                        <div class="widget-content padded">
-                          <div id="ma">
-                            Loading...
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="widget-container">
-                        <div class="heading">
-                          <i class="fa fa-bar-chart"></i>ARIMA
-                        </div>
-                        <div class="widget-content padded">
-                          <div id="arima">
-                            Loading...
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </div>
             </div> 
             <div class="row">
