@@ -10,7 +10,7 @@
           <div class="col-lg-12">
             <div class="widget-container fluid-height clearfix">
               <div class="heading">
-                  <a class="btn btn-success" href="#" target="_blank">Cetak Laporan</a>
+                  <a class="btn btn-success" href="template/docs_pembelian.php" target="_blank">Cetak Laporan</a>
               </div>
               <div class="widget-content padded clearfix">
                 <table class="table table-bordered table-striped" id="dataTable1">

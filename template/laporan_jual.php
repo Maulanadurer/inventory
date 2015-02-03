@@ -113,7 +113,7 @@
                   <?php }?>
                   </tbody>
                 </table>
-                <a class="btn btn-success" href="template/docs_penjualan.php?cabang=<?php echo $_POST['kode_cabang'].'&sdate='.$sdate.'&edate='.$edate.?>" target="_blank">Cetak Laporan</a>
+                <a class="btn btn-success" href="template/docs_penjualan.php?cabang=<?php if (isset($_POST['submit'])){echo $_POST['kode_cabang'].'&sdate='.$sdate.'&edate='.$edate;}?>" target="_blank">Cetak Laporan</a>
               </div>
             </div>
           </div>
