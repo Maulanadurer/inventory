@@ -187,7 +187,6 @@ function data_ma($data){
     }
     return $data_ma;
 }
-
 // echo "<pre>";
 // print_r(array_1($data));
 // print_r(array_2($data));

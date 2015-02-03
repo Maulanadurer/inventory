@@ -110,6 +110,12 @@
                       Monitoring Stok Barang
                     </p></a>
                     
+                  </li>                  
+                  <li><a href="main.php?hal=monitoring_stok_cabang">
+                    <p>
+                      Monitoring Stok Cabang
+                    </p></a>
+                    
                   </li>
                   <?php }?>
                   <?php if($nav == 0 or $nav == 2){?>

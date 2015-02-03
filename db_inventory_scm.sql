@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2015 at 09:06 PM
+-- Generation Time: Feb 03, 2015 at 06:15 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS `tb_barang` (
 INSERT INTO `tb_barang` (`kode_barang`, `nama_barang`, `deskripsi_barang`, `stok_barang`, `kode_admin`, `safety_stock`) VALUES
 ('BRG001', 'Clutch Cover (Tutup kopling)', 'Kopling ini adalah produk yang bagus.', 850, 'ADM001', 300),
 ('BRG002', 'Clutch Disc (Pelat Kopling)', 'Pelat Kopling ini adalah produk yang bagus.', 1550, 'ADM001', 200),
-('BRG003', 'Water Pump', 'Water Pump ini adalah barang yang bagus', 200, 'ADM001', 300),
+('BRG003', 'Water Pump', 'Water Pump ini adalah barang yang bagus', 250, 'ADM001', 200),
 ('BRG004', 'Klem Acu', 'Klem Acu ini adalah barang yang bagus', 1050, 'ADM001', 250),
 ('BRG005', 'Master Rem', 'Master Rem ini adalah barang  yang bagus', 850, 'ADM001', 200),
 ('BRG006', 'Pinion Gear', 'Pinion Gear ini adalah barang yang bagus', 350, 'ADM001', 250),
@@ -318,9 +318,9 @@ INSERT INTO `tb_distribusi_brg` (`id_distribusi`, `kode_cabang`, `tgl_jual`, `tg
 ('DIS001', 'CAB001', '2013-01-25', '2013-01-29', 2),
 ('DIS002', 'CAB002', '2013-01-25', '2013-01-29', 1),
 ('DIS003', 'CAB003', '2013-04-29', '2013-04-30', 0),
-('DIS004', 'CAB001', '2013-03-29', '2014-12-29', 1),
-('DIS005', 'CAB001', '2013-03-29', '0000-00-00', 0),
-('DIS006', 'CAB001', '2013-04-29', '0000-00-00', 0),
+('DIS004', 'CAB001', '2013-03-29', '2014-12-29', 2),
+('DIS005', 'CAB001', '2013-03-29', '2013-03-27', 2),
+('DIS006', 'CAB001', '2013-04-29', '2013-04-30', 2),
 ('DIS007', 'CAB001', '2013-05-29', '0000-00-00', 0),
 ('DIS008', 'CAB001', '2013-05-25', '0000-00-00', 0),
 ('DIS009', 'CAB001', '2013-04-29', '0000-00-00', 0),
@@ -625,6 +625,30 @@ INSERT INTO `tb_permintaan` (`id_permintaan`, `tgl_jual`, `kode_cabang`, `status
 ('POI014', '2013-02-27', 'CAB002', 1),
 ('POI015', '2013-02-27', 'CAB001', 1),
 ('POI016', '2013-02-12', 'CAB001', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tb_stok_cabang`
+--
+
+CREATE TABLE IF NOT EXISTS `tb_stok_cabang` (
+  `kode_stok` int(11) NOT NULL AUTO_INCREMENT,
+  `kode_barang` varchar(30) NOT NULL,
+  `kode_cabang` varchar(15) NOT NULL,
+  `stok_cabang` int(11) NOT NULL,
+  PRIMARY KEY (`kode_stok`),
+  KEY `kode_cabang` (`kode_cabang`),
+  KEY `kode_barang` (`kode_barang`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `tb_stok_cabang`
+--
+
+INSERT INTO `tb_stok_cabang` (`kode_stok`, `kode_barang`, `kode_cabang`, `stok_cabang`) VALUES
+(1, 'BRG001', 'CAB001', 200),
+(2, 'BRG007', 'CAB001', 100);
 
 -- --------------------------------------------------------
 

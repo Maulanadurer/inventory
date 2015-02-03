@@ -19,19 +19,24 @@
     <div class="login-wrapper">
       <div class="login-container">
         <a href="#"><h2>CV Cipta Mandiri</h2></a>
-        <form action="proses/login.php" method="post">
+        <form action="proses/recover.php" method="post">
           <div class="form-group">
-            <input class="form-control" placeholder="Username or Email" type="text" name="username">
+            <input class="form-control" placeholder="Email" type="text" name="username">
           </div>
           <div class="form-group">
-            <input class="form-control" placeholder="Password" type="password" name="password">
             <input type="submit" value="&#xf054;" name="submit">
           </div>
           <div class="form-options clearfix">
-            <a class="pull-right" href="forgot_password.php">Forgot password?</a>
-            <div class="text-left">
-              <label class="checkbox"><input type="checkbox"><span>Remember me</span></label>
-            </div>
+          <br/><br/>
+          <?php if(!isset($_GET['sub'])){?>
+            Plese insert your email address we will send you recovery password
+          <?php }else{ 
+            if($_GET['sub']==1){
+              echo "Your password recovery key has been sent to your e-mail address.";
+            }else{
+              echo "No user with that e-mail address exists.";
+            }
+           }?>
           </div>
         </form>
       </div>
