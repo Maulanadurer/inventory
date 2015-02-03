@@ -17,30 +17,20 @@ class PDF extends FPDF
              'database' => database ));
         $database = SimplePDO::getInstance();
         if($content == 0){
-            $row = $database->get_results( "SELECT tc.*,tp.* FROM tb_penjualan tp JOIN tb_cabang tc ON tc.kode_cabang=tp.kode_cabang" );
+            $sdate=$_GET['sdate'];
+            $edate=$_GET['edate'];
+            $where = "";
+            if($_GET['cabang']!='all'){
+                $where = " AND tp.kode_cabang='".$_GET['cabang']."'";
+            }
+            $row = $database->get_results( "SELECT * FROM tb_penjualan tp JOIN tb_cabang tc ON tc.kode_cabang=tp.kode_cabang 
+                                                      JOIN tb_jenistransaksijual tj ON tj.kode_jenistransaksijual=tp.kode_jenistransaksijual 
+                                                      WHERE tp.tgl_jual BETWEEN '".$sdate."' AND '".$edate."' ".$where."" );
         }
 
 
         return $row;
     }
-
-    function LoadDetail($id)
-    {
-        $row = "";
-        SimplePDO::set_options( array(
-             'host' => host, 
-             'user' => user, 
-             'password' => password, 
-             'database' => database ));
-        $database = SimplePDO::getInstance();
-        if($content == 0){
-            $row = $database->get_results( "SELECT tp.*,tb.* FROM tb_detail_penjualan tp JOIN tb_barang tb ON tp.kode_barang=tb.kode_barang WHERE tp.id_transaksi='".$id."'" );
-        }
-
-
-        return $row;
-    }
-
     function Header()
     {
         // Logo
@@ -59,7 +49,7 @@ class PDF extends FPDF
         $this->Cell(0,30,'__________________________________________________________________________________',0,0,'C');
         $this->Ln(25);
         $this->SetFont('Arial','',15);
-        $this->Cell(0,30,'Daftar Penjulan Barang',0,0,'C');
+        $this->Cell(0,30,'Daftar Penjualan Barang',0,0,'C');
         $this->Ln(25);
     }
     // Colored table
@@ -72,7 +62,7 @@ class PDF extends FPDF
         $this->SetLineWidth(.3);
         $this->SetFont('','B',12);
         // Header
-        $w = array(20, 35, 90, 45);
+        $w = array(20, 35, 35, 30,60);
         for($i=0;$i<count($header);$i++)
             $this->Cell($w[$i],7,$header[$i],1,0,'C',true);
         $this->Ln();
@@ -84,47 +74,36 @@ class PDF extends FPDF
         $fill = false;
         $i = 1;
         $sum = 0;
+        $y = 0;
         foreach($data as $row)
         {
             $this->Cell($w[0],6,$i,'LR',0,'C',$fill);
             $this->Cell($w[1],6,$row->id_transaksi,'LR',0,'L',$fill);
             $this->Cell($w[2],6,$row->tgl_jual,'LR',0,'L',$fill);
+            $this->Cell($w[3],6,$row->jenis_transaksijual,'LR',0,'L',$fill);
+            $this->Cell($w[4],6,$row->nama_cabang,'LR',0,'C',$fill);
             $this->Ln();
             $fill = !$fill;
             $i++;
+            $y += 10;
             // $sum += $row->stok_barang;
         }
         // Closing line
         // $this->Cell($w,6,$i,'LR',0,'C',$fill);
         $this->Cell(array_sum($w),0,'','T');
-        $this->Signature();
+        $this->Signature($y);
 
     }
 
-    function createTable()
+    function Signature($y)
     {
-        // Data loading
-        $data = $this->LoadData(0);
-        // Column headings
-        $i = 100;
-        foreach ($data as $row) {
-            $this->SetY($i);
-            $header = array('No', 'ID Transaksi', 'Tanggal');
-            $this->FancyTable($header,$data); 
-            $i =+ 100;
-        }
-
-    }
-
-    function Signature()
-    {
-        $this->SetY(90);
+        $this->SetY(75+$y);
         $this->SetFont('Arial','',12);
         $this->Cell(0,10,'Hormat kami,',0,0,'R');
         $this->Ln(5);
         $this->Cell(0,10,'CV Cipta Mandiri,',0,0,'R');
         $this->Ln(20);
-        $this->Cell(0,10,'Bagian Gudang',0,0,'R');
+        $this->Cell(0,10,'Bagian Penjualan',0,0,'R');
     }
 
     function Footer()
@@ -139,10 +118,12 @@ class PDF extends FPDF
 }
 
 $pdf = new PDF();
-
+// Column headings
+$header = array('No', 'No Transaksi', 'Tanggal Transaksi', 'Jenis Transaksi','Nama Cabang');
+// Data loading
+$data = $pdf->LoadData(0);
 $pdf->SetFont('Arial','',14);
 $pdf->AddPage();
-$pdf->createTable();
-// $pdf->FancyTable($header,$data);
+$pdf->FancyTable($header,$data);
 $pdf->Output();
 ?>
